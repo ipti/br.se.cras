@@ -86,7 +86,7 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" placeholder="" id="" title="Informe um nome válido."  >
+              <input  type="text" name="rgNumero" class="form-control" placeholder="" id="" title="Informe um nome válido." maxlength="8"  >
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">

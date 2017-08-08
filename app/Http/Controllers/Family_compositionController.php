@@ -577,17 +577,16 @@ public function destroy($id)
 
 
 
-    public function atendimentos($id) {
-        $identificacao = DB::select(
-        'SELECT DISTINCT * FROM Identification_person where   Identification_person.id = '.$id);
-
-            $membro = DB::select('select * from family_composition as fc
-          where fc.id_Identification_person ='.$id);
-
-        $tecnicos = DB::select('SELECT * from technician');
+    public function atendimentos($id) {        
+        $identificacao = DB::select('SELECT DISTINCT * FROM Identification_person where   Identification_person.id = '.$id); 
+        // dd($identificacao);           
+     $membro = DB::select('SELECT * FROM family_composition as fc where fc.id_Identification_person ='.$id);
+            // dd($membro);
+        $tecnicos = DB::select('SELECT * FROM technician');
 
         $servico = DB::select('SELECT * FROM service');
-                // dd($tecnicos);
+            //dd($tecnicos);
+        
            // dd($identificacao[0]->id);
        // dd($membro);
 
@@ -618,8 +617,8 @@ public function destroy($id)
     public function cadastroAtentimentos(Request $reqeust, $id)
     {
          $dados = $this->request->all();
-            // dd($dados);
-            // dd($id);
+            dd($dados);
+            //dd($id);
          if (is_null($dados['id_user'])) {
             $dados['id_user'] = $id;
 

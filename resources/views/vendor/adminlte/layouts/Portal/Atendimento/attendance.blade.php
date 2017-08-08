@@ -13,6 +13,7 @@
         <div class="box-header">
             <i class="ion ion-clipboard"></i>
             <h3 class="box-title"> Todos os Atendimentos</h3>
+            <a href="http://local.cras.com/attendance/" aria-controls="example2" data-dt-idx="0" tabindex="0">Novo</a>
             <hr>
         </div>
 
@@ -30,10 +31,8 @@
             </tr>
             </thead>
             <tbody>
-            @if(count($identificacao) != 0 || count($membro) != 0)
-            @foreach($identificacao as $id)
-            <tr>
-                
+            @if(count($identificacao) != 0 || count($membro) != 0)<tr>
+            @foreach($identificacao as $id)                            
                 <th style="text-align: center;">{{$id->id}}</th>
                 <th style="text-align: center;">{{$id->nomeUser}}</th>
                 <th style="text-align: center;">{{$id->dataAtendimento}}</th>
@@ -41,7 +40,7 @@
                 <th style="text-align: center;">{{$id->tecnicoNome}} </th>
                 <th style="text-align: center;">{{$id->solicitation}}</th>
                 <th style="text-align: center;">{{$id->transfer}}</th>
-                <th style="text-align: center;">{{$id->result}}</th>
+                <th style="text-align: center;">{{$id->result}}</th>                
 
             </tr>
                  @endforeach
