@@ -12,8 +12,22 @@
     <div class="box box-info" style="padding-left: 20px; padding-right: 20px;">
         <div class="box-header">
             <i class="ion ion-clipboard"></i>
-            <h3 class="box-title"> Todos os Atendimentos</h3>
-            <a href="http://local.cras.com/attendance/" aria-controls="example2" data-dt-idx="0" tabindex="0">Novo</a>
+            <div class="row">
+    <div class="col-md-12">
+
+    </div>
+    <div class="col-md-6">
+<h3 class="box-title"> Todos os Atendimentos</h3>
+    </div>
+    <div class="col-md-6">
+<a href="http://local.cras.com/attendance/" style="color:white; text-decoration:none;">
+                <button type="button" class="btn btn-block btn-primary btn-xs" style="width: 30%; margin-left: 73%;">
+                <i class='fa fa-plus-square-o'> &nbsp;</i> Novo Atendimento
+                </button></a>
+    </div>
+</div>
+            
+            
             <hr>
         </div>
 

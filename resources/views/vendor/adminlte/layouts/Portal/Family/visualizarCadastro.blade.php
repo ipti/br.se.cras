@@ -872,9 +872,7 @@
                  value="{{$total}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
 
-                </div>
-                
-
+                </div>                
           </div>
           <br><br>
           <div class="row"  style="text-align: center;">
@@ -898,14 +896,10 @@
                   <th>Benefícios</th>
                   <th>Ações</th>
                 </tr>
-
-                <?php 
-                
-
+                <?php                 
         $total = count($membros);
                   $loop = 0;
                   $sum = 0;
-
         foreach ($membros as $m) {
         $linha0 = " <tr>";
         $linha18 = "<th><input type='number' class='form-control' id='nisMembro' name='nis$loop' value='{$m->nis}'></th>";
@@ -934,12 +928,7 @@
         $linha15 = "<div class=input-group><span class=input-group-addon> Previdência Social</span><input style=height:1%!important; type='number' class='form-control' id='previdenciaMembro' name='previdencia{$loop}' value={$m->previdencia} /><span class=input-group-addon><span>R$</span></span></div> <br>";
         $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->incomeUser} /><span class=input-group-addon><span>R$</span></span></div>";        
         $linha16 = "</th>";
-        $linha17 = " </tr>";  
-                //soma para a renda dos familiares 
-                 // $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia; 
-                 // $sum = $sum + $adicao;
-                 // $adicao = $sum;                       
-                //dd($id);                             
+        $linha17 = " </tr>";                            
          echo "".$linha0;
          echo "".$linha18;
          echo "".$linha1;
@@ -961,16 +950,8 @@
          echo "".$linha8;
          echo "".$linha17;                         
          $loop++;         
-         }
-        // echo "".$adicao;
-//          $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia;  
- // $linha21="<div class=input-group><span class=input-group-addon>Renda Total</span><input style=width:15%; type='number' class='form-control' id='total' name='total'
- //         value={$adicao} disabled=/><button style=height:36px; disabled=>R$</button></div>";
-         //RENDA TOTAL DOS FAMILIARES
-         // echo "".$linha21;
-        // dd($adicao);
-     ?>
-               
+         }   
+     ?>              
               </tbody>
               <tfoot>
               <tr>
@@ -979,11 +960,8 @@
               </tr>
               </tfoot>
             </table>
-            <div class="row"  style="text-align: center;">
-              <!-- <button type="button" id="aba4" class="btn btn-success" onClick="sel(this.id)">Finalizar Cadastro</button> -->             
-              <input type="submit" name="Finalizar Cadastro" class="btn btn-success" value="Editar Cadastro">
-              
-            </div>
+            <div class="row"  style="text-align: center;">           
+              <input type="submit" name="Finalizar Cadastro" class="btn btn-success" value="Editar Cadastro">     </div>
           </div>
         </div>
         <br>

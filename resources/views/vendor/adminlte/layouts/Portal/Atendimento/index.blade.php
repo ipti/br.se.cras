@@ -77,7 +77,6 @@
                             </select>
                         </div>
                 </div>
-
                 <div class="col-md-6 col-sm-6 col-xs-12">
 
                         <!-- <span class="input-group-addon">UF</span> -->
@@ -91,7 +90,6 @@
                             </select>
                         </div>
                 </div>
-
         </div>
          <br><br>
          <div class="row"  style="text-align: center;">
@@ -99,7 +97,6 @@
             </div>
         <br><br>
 </div>
-
 </form>
  <?php
 // var_dump(DB::table('attendance_daily')->get());exit();
@@ -112,6 +109,5 @@
  //   // $consulta = mysql_query("SELECT * FROM attendance_daily WHERE id_indentification_person = $iden");
  //   // dd($consulta);
  // }
- ?>
-  
+ ?>  
 @endsection 

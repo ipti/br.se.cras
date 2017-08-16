@@ -21,7 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
 	 Route::post('/familyCdst',                               	 'Family_compositionController@store');
      Route::get('/family/{id}',                                  'Family_compositionController@show');
      Route::post('/family/{id}',                                 'Family_compositionController@update');
-    
+
+         //geral 
      Route::get('/home',                               	  'Family_compositionController@atendimentosDiario');
 
      // rotas responsáveis pelos atendimentos 

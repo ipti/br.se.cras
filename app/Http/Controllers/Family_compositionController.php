@@ -469,7 +469,6 @@ public function destroy($id)
                                attendance_daily.data='.$data);        
      return view('vendor.adminlte.home', compact('identificacao'));
 
-
     }    
 }
 
