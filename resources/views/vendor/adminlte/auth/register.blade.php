@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
 <body class="hold-transition register-page">
     <div id="app" v-cloak>
         <div class="register-box">

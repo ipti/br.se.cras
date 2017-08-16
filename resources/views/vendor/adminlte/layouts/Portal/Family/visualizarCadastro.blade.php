@@ -2,7 +2,9 @@
 @section('main-content')
 
       @foreach($identificacao as $id)
-
+      <header>
+        <link rel="stylesheet" type="text/css" href="style.css">
+      </header>
   <div class="Cadastrar">
   <form action="{{url("/family/$id->id_Identification_person")}}"  method="post" name="formulario" id="formulario">
     {{csrf_field()}}
@@ -722,7 +724,7 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Renda Mensal do usuário </span>
-                <input  type="number" name="rendaFamiliar"  value="{{$id->income_family}}"   >
+                <input  type="number" name="rendaFamiliar"  value="{{$id->income_family}}" required=""  >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -846,24 +848,38 @@
                 <label id="opcao4">
                   <div class=input-group><span class=input-group-addon>LOAS/BPC</span>
                   <input style=height:1%!important; type="number" class="form-control" name="loas" 
-                    value="{{$id->loasbpc}}" 
+                    value="{{$id->loasbpc}}" required="" 
                   />
                   <span class=input-group-addon><span>R$</span></span></div>
                 </label> 
                 <label id="opcao4">
                  <div class=input-group><span class=input-group-addon> Bolsa Família</span>
-                 <input style=height:1%!important; type="number" class="form-control" name="bolsaFamilia" 
+                 <input style=height:1%!important; type="number" class="form-control" name="bolsaFamilia" required="" 
                  value="{{$id->bolsa_familia}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
               <br>
             </div>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                  <label id="opcao4">
-                <div class=input-group><span class=0input-group-addon> Previdência Social</span>
-                <input style=height:1%!important; type="number" class="form-control" name="previdencia"
+                <div class=input-group><span class=input-group-addon> Previdência Social</span>
+                <input style=height:1%!important; type="number" class="form-control" name="previdencia" required="" 
                  value="{{$id->previdencia}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
+                <?php
+                //var_dump($id);                
+                $soma = $id->bolsa_familia + $id->previdencia + $id->loasbpc + $id->income_family;  
+                //dd($id);
+                ?>                
+
+                 <label id="opcao4">
+                <div class=input-group><span class=input-group-addon> Renda Total</span>
+                <input style=height:1%!important; type="number" class="form-control" disabled="" name="rendaTotal" required="" 
+                 value="{{$soma}}" /><span class=input-group-addon><span>R$</span></span></div>
+                </label>
+
                 </div>
+                
+
           </div>
           <br><br>
           <div class="row"  style="text-align: center;">
@@ -893,6 +909,7 @@
 
         $total = count($membros);
                   $loop = 0;
+                  $sum = 0;
 
         foreach ($membros as $m) {
         $linha0 = " <tr>";
@@ -920,10 +937,13 @@
         $linha13 ="<div class=input-group><span class=input-group-addon> Bolsa Família</span><input style=height:1%!important; type='number' class='form-control' id='bolsaFamiliaMembro' name='bolsaFamilia{$loop}' value={$m->bolsaFamilia} /><span class=input-group-addon><span>R$</span></span></div>";
         $linha14 = "<br>";
         $linha15 = "<div class=input-group><span class=input-group-addon> Previdência Social</span><input style=height:1%!important; type='number' class='form-control' id='previdenciaMembro' name='previdencia{$loop}' value={$m->previdencia} /><span class=input-group-addon><span>R$</span></span></div> <br>";
-        $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->incomeUser} /><span class=input-group-addon><span>R$</span></span></div>";
-
+        $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->incomeUser} /><span class=input-group-addon><span>R$</span></span></div>";        
         $linha16 = "</th>";
-        $linha17 = " </tr>";
+        $linha17 = " </tr>";   
+                 $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia; 
+                 $sum = $sum + $adicao;
+                 $adicao = $sum;                       
+                //dd($id);                             
          echo "".$linha0;
          echo "".$linha18;
          echo "".$linha1;
@@ -941,15 +961,22 @@
          echo "".$linha14;
          echo "".$linha15;
          echo "".$linha19;
-         echo "".$linha16;
-        echo "".$linha8;
-         echo "".$linha17;
+         echo "".$linha16;         
+         echo "".$linha8;
+         echo "".$linha17; 
+                          
          // echo "".$linha8;
          // echo "".$linha9;
          $loop++;
-
+         //var_dump($adicao);         
          }
-
+        // echo "".$adicao;
+//          $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia;  
+ $linha21="<div class=input-group><span class=input-group-addon>Renda Total</span><input style=width:15%; type='number' class='form-control' id='total' name='total'
+         value={$adicao} disabled=/><button style=height:36px; disabled=>R$</button></div>";
+         //RENDA TOTAL DOS FAMILIARES
+         // echo "".$linha21;
+        // dd($adicao);
      ?>
                
               </tbody>
@@ -961,15 +988,16 @@
               </tfoot>
             </table>
             <div class="row"  style="text-align: center;">
-              <!-- <button type="button" id="aba4" class="btn btn-success" onClick="sel(this.id)">Finalizar Cadastro</button> -->
+              <!-- <button type="button" id="aba4" class="btn btn-success" onClick="sel(this.id)">Finalizar Cadastro</button> -->             
               <input type="submit" name="Finalizar Cadastro" class="btn btn-success" value="Editar Cadastro">
+              
             </div>
           </div>
         </div>
         <br>
       </div>
     </form>
-  </div>
+  </div>  
   @endforeach
   
   @endsection

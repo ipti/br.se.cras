@@ -25,18 +25,21 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/family/{id}',                                  'Family_compositionController@show');
      Route::post('/family/{id}',                                 'Family_compositionController@update');
 
-     Route::get('/attendance/{id}',                               'Family_compositionController@atendimentos');
+     Route::get('/attendance/{id}',                             'Family_compositionController@atendimentos');
 
 
-     Route::post('/attendance/{id}',                              'Family_compositionController@cadastroAtentimentos');
+     Route::post('/attendance/{id}',                       'family_compositionController@cadastroAtentimentos');
 
 //     atendimentos da view de todos os atendimentos
-     Route::get('/attendance',                                     'Family_compositionController@atendimentosIndex');
+     Route::get('/attendance',                             'Family_compositionController@atendimentosIndex');
 
     // Route::post('/attendance/{id}/cdstA',                        'Family_compositionController@atendimentos');
 
 
-     Route::get('/home',                               			  'Family_compositionController@atendimentosDiario');
+     Route::get('/home',                               	  'Family_compositionController@atendimentosDiario');
+
+     //Route::get('/attendance/{id}',                             'HomeController@atendimentos');
+     //Route::post('/attendance/{id}',                                 'HomeController@update');
 
 
 

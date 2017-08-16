@@ -11,17 +11,16 @@
       <h3 class="box-title" style="padding-left: 1%;">Atendimento de Atendimentos
         	 <div class="col-md-2 pull-right" >
           		<!--  -->
+
           			<a href="#" style="color:white; text-decoration:none;"></a>
        		  </div>
 		</h3>
-        <hr>   
-			
-
+        <hr>   			           
             <div  class="row" id="box1">
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group" id="">
                   <span class="input-group-addon">Data do Atendimento</span>
-              <input type="text" class="form-control"   name="data_atendimento" id="data_atendimento"  placeholder="Data do atendimento" required="">
+              <input type="text" class="form-control"   name="data_atendimento" id="data_atendimento"  placeholder="Data do atendimento" required="" value="">              
                 </div>
               </div>
             </div>
@@ -102,5 +101,17 @@
 </div>
 
 </form>
+ <?php
+// var_dump(DB::table('attendance_daily')->get());exit();
+
+
+ // for ($i=0; $i < 1; $i++) { 
+ //    // $iden = $id;
+ //    // dd($iden);
+
+ //   // $consulta = mysql_query("SELECT * FROM attendance_daily WHERE id_indentification_person = $iden");
+ //   // dd($consulta);
+ // }
+ ?>
   
-@endsection
+@endsection 

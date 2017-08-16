@@ -33,7 +33,7 @@
             <tbody>
             @if(count($identificacao) != 0 || count($membro) != 0)<tr>
             @foreach($identificacao as $id)                            
-                <th style="text-align: center;">{{$id->id}}</th>
+                <th style="text-align: center;">{{$id->id}}</th>                
                 <th style="text-align: center;">{{$id->nomeUser}}</th>
                 <th style="text-align: center;">{{$id->dataAtendimento}}</th>
                 <th style="text-align: center;">{{$id->rg_number}}-{{$id->rg_emission_organ}}-{{$id->rg_UF}} | {{$id->NIS}}</th>
@@ -55,7 +55,7 @@
                           <th style="text-align: center;">{{$m->solicitation}}</th>
                           <th style="text-align: center;">{{$m->transfer}}</th>
                           <th style="text-align: center;">{{$m->result}}</th>
-                       </tr>
+                       </tr>                       
                      @endforeach
                      @else
                         <tr>
