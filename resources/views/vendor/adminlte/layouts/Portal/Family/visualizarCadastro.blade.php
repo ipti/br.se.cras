@@ -865,16 +865,11 @@
                 <input style=height:1%!important; type="number" class="form-control" name="previdencia" required="" 
                  value="{{$id->previdencia}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
-                <?php
-                //var_dump($id);                
-                $soma = $id->bolsa_familia + $id->previdencia + $id->loasbpc + $id->income_family;  
-                //dd($id);
-                ?>                
-
+           
                  <label id="opcao4">
                 <div class=input-group><span class=input-group-addon> Renda Total</span>
                 <input style=height:1%!important; type="number" class="form-control" disabled="" name="rendaTotal" required="" 
-                 value="{{$soma}}" /><span class=input-group-addon><span>R$</span></span></div>
+                 value="{{$total}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
 
                 </div>
@@ -939,10 +934,11 @@
         $linha15 = "<div class=input-group><span class=input-group-addon> Previdência Social</span><input style=height:1%!important; type='number' class='form-control' id='previdenciaMembro' name='previdencia{$loop}' value={$m->previdencia} /><span class=input-group-addon><span>R$</span></span></div> <br>";
         $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->incomeUser} /><span class=input-group-addon><span>R$</span></span></div>";        
         $linha16 = "</th>";
-        $linha17 = " </tr>";   
-                 $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia; 
-                 $sum = $sum + $adicao;
-                 $adicao = $sum;                       
+        $linha17 = " </tr>";  
+                //soma para a renda dos familiares 
+                 // $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia; 
+                 // $sum = $sum + $adicao;
+                 // $adicao = $sum;                       
                 //dd($id);                             
          echo "".$linha0;
          echo "".$linha18;
@@ -963,17 +959,13 @@
          echo "".$linha19;
          echo "".$linha16;         
          echo "".$linha8;
-         echo "".$linha17; 
-                          
-         // echo "".$linha8;
-         // echo "".$linha9;
-         $loop++;
-         //var_dump($adicao);         
+         echo "".$linha17;                         
+         $loop++;         
          }
         // echo "".$adicao;
 //          $adicao = $m->incomeUser + $m->loas + $m->previdencia + $m->bolsaFamilia;  
- $linha21="<div class=input-group><span class=input-group-addon>Renda Total</span><input style=width:15%; type='number' class='form-control' id='total' name='total'
-         value={$adicao} disabled=/><button style=height:36px; disabled=>R$</button></div>";
+ // $linha21="<div class=input-group><span class=input-group-addon>Renda Total</span><input style=width:15%; type='number' class='form-control' id='total' name='total'
+ //         value={$adicao} disabled=/><button style=height:36px; disabled=>R$</button></div>";
          //RENDA TOTAL DOS FAMILIARES
          // echo "".$linha21;
         // dd($adicao);
