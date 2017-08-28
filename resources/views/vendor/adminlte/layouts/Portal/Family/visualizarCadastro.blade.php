@@ -2,11 +2,10 @@
 @section('main-content')
 
       @foreach($identificacao as $id)
-      <header>
-        <link rel="stylesheet" type="text/css" href="style.css">
-      </header>
+      
   <div class="Cadastrar">
-  <form action="{{url("/family/$id->id_Identification_person")}}"  method="post" name="formulario" id="formulario">
+
+  <form action="{{url("/family/$id->identificacao_usuario")}}"  method="post" name="formulario" id="formulario">
     {{csrf_field()}}
     <div class="box box-info">
       <table class="table table-striped table-bordered" width="100%" border="0" align="center" cellspacing="0" id="t_abas">
@@ -48,14 +47,14 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class="input-group" id="">
                   <span class="input-group-addon">Data Entrada</span>
-              <input type="text" class="form-control"   name="data_entrada" id="data_entrada"  value="{{$id->date_initial}}" >
+              <input type="text" class="form-control"   name="data_entrada" id="data_entrada"  value="{{$id->data_inicial}}" >
                 </div>
 
               </div>
               <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Data Desligamento</span>
-                <input type="text" class="form-control"   name="data_saida"  id="data_saida" value="{{$id->date_end}}" >
+                <input type="text" class="form-control"   name="data_saida"  id="data_saida" value="{{$id->data_final}}" >
               </div>
               </div>
           
@@ -66,13 +65,13 @@
            <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Nome</span>
-              <input  type="text" name="nome" class="form-control" value="{{$id->name}}" >
+              <input  type="text" name="nome" class="form-control" value="{{$id->nome}}" >
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Apelido</span>
-              <input  type="text" name="apelido" class="form-control" value="{{$id->nick_name}}" >
+              <input  type="text" name="apelido" class="form-control" value="{{$id->apelido}}" >
             </div>
           </div>
         </div>
@@ -80,13 +79,13 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">Data de Nascimento</span>
-               <input type="text" class="form-control"   name="data_nascimento"  value="{{$id->birth}}"  >
+               <input type="text" class="form-control"   name="data_nascimento"  value="{{$id->data_nascimento}}"  >
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Nº Cadastro</span>
-              <input  type="text" name="NumeroCadastro" class="form-control" value="{{$id->register_number}}" >
+              <input  type="text" name="NumeroCadastro" class="form-control" value="{{$id->certidao_nascimento}}" >
             </div>
           </div>
           <div class="col-md-4 col-sm-6 col-xs-12">
@@ -100,13 +99,13 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" value="{{$id->rg_number}}" >
+              <input  type="text" name="rgNumero" class="form-control" value="{{$id->numero_rg}}" >
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group " id="">
               <span class="input-group-addon">Emissão</span>
-              <input  type="text" name="RgEmissao" class="form-control" value="{{$id->rg_emission_date}}" >
+              <input  type="text" name="RgEmissao" class="form-control" value="{{$id->data_emissao_rg}}" >
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
@@ -115,7 +114,7 @@
               <div class="input-group">
               <label class="input-group-addon">UF</label>
               <select class="form-control" name="RGuf"     >
-                <option selected="">{{"$id->rg_UF"}}</option>
+                <option selected="">{{"$id->uf_rg"}}</option>
                  <option value="AC">AC</option>
                 <option value="AL">AL</option>
                 <option value="AP">AP</option>
@@ -149,7 +148,7 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Órgão Emissor</span>
-              <input  type="text" name="RgOrgaoEmissor" class="form-control" value="{{$id->rg_emission_organ}}" >
+              <input  type="text" name="RgOrgaoEmissor" class="form-control" value="{{$id->emissao_rg}}" >
             </div>
           </div>
         </div>
@@ -164,7 +163,7 @@
               <div class="radio4" >
                 <span class="input-group-addon">Deficiente Físico ou Mental ?</span>
                 <br>
-                @if($id->deficient == 1)
+                @if($id->deficiente == 1)
                 <label id="opcao3" style="padding-left: 35%">
                   <input type="radio" name="deficiente" id="" value="1" checked="" >
                   Não
@@ -192,7 +191,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Mãe</span>
-              <input  type="text" name="mae" class="form-control" value="{{$id->mother}}"  >
+              <input  type="text" name="mae" class="form-control" value="{{$id->mae}}"  >
             </div>
           </div>
         </div>
@@ -200,7 +199,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Pai <br></span>
-              <input  type="text" name="pai"  class="form-control" value="{{$id->mother}}"  >
+              <input  type="text" name="pai"  class="form-control" value="{{$id->pai}}"  >
             </div>
           </div>
         </div>
@@ -210,7 +209,7 @@
               <!-- <label style="padding-left: 1%;">Sexo:</label> -->
               <span class="input-group-addon">Estado Civil</span>
               <br>
-              @if($id->situation === 'solteiro')
+              @if($id->estado_civil === 'solteiro')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro"  checked=""  >
                 Solteiro
@@ -235,7 +234,7 @@
                 <input type="radio" name="estadoCivil"      id="" value="outro"  >
                 Outro
               </label>
-              @elseif($id->situation === 'casado')
+              @elseif($id->estado_civil === 'casado')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro"  >
                 Solteiro
@@ -259,7 +258,7 @@
               <label  id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="outro" >
                 Outro
-              </label>  @elseif($id->situation === 'separado')
+              </label>  @elseif($id->estado_civil === 'separado')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro"  >
                 Solteiro
@@ -283,7 +282,7 @@
               <label  id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="outro" >
                 Outro
-              </label> @elseif($id->situation === 'divorciado')
+              </label> @elseif($id->estado_civil === 'divorciado')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro" >
                 Solteiro
@@ -308,7 +307,7 @@
                 <input type="radio" name="estadoCivil"      id="" value="outro"  >
                 Outro
               </label>
-              @elseif($id->situation === 'viuvo')
+              @elseif($id->estado_civil === 'viuvo')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro"  >
                 Solteiro
@@ -332,7 +331,7 @@
               <label  id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="outro"  >
                 Outro
-              </label> @elseif($id->situation === 'outro')
+              </label> @elseif($id->estado_civil === 'outro')
               <label id="opcao">
                 <input type="radio" name="estadoCivil"      id="" value="solteiro"  >
                 Solteiro
@@ -393,7 +392,7 @@
             <div class="col-md-12 col-sm-6 col-xs-12">
               <div class="input-group " id="" >
                 <span class="input-group-addon">Endereço <br></span>
-                <input  type="text" name="address"     class="form-control" value="{{$id->address}}" id=""  >
+                <input  type="text" name="address"     class="form-control" value="{{$id->endereco}}" id=""  >
               </div>
             </div>
           </div>
@@ -401,13 +400,13 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Telefone</span>
-                <input  type="text" name="telefone" class="form-control" value="{{$id->phone}}" title="Informe um nome válido." >
+                <input  type="text" name="telefone" class="form-control" value="{{$id->telefone}}" title="Informe um nome válido." >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group " id="" >
                 <span class="input-group-addon">Ponto de Referência</span>
-                <input  type="text" name="pontoReferencia"     class="form-control" value="{{$id->reference_point}}" id="" title="Informe um nome válido." >
+                <input  type="text" name="pontoReferencia"     class="form-control" value="{{$id->ponto_referencia}}" id="" title="Informe um nome válido." >
               </div>
             </div>
           </div>
@@ -417,7 +416,7 @@
                 <!-- <label style="padding-left: 1%;">Sexo:</label> -->
                 <span class="input-group-addon">Condições de Moradia</span>
                 <br>
-                @if($id->conditions_home === 'propria')
+                @if($id->condicoes_moradia === 'propria')
                 <label id="opcao1">
                   <input type="radio" name="condicoesMoradia"      id="" value="propria" checked="">
                   Própria
@@ -434,7 +433,7 @@
                   <input type="radio" name="condicoesMoradia"      id="" value="areaDeOcupacao" >
                   Área de Ocupação
                 </label> 
-                @elseif($id->conditions_home === 'alugada')
+                @elseif($id->condicoes_moradia === 'alugada')
                 <label id="opcao1">
                   <input type="radio" name="condicoesMoradia"      id="" value="propria" >
                   Própria
@@ -451,7 +450,7 @@
                   <input type="radio" name="condicoesMoradia"      id="" value="areaDeOcupacao" >
                   Área de Ocupação
                 </label>  
-                 @elseif($id->conditions_home === 'cedida')
+                 @elseif($id->condicoes_moradia === 'cedida')
                 <label id="opcao1">
                   <input type="radio" name="condicoesMoradia"      id="" value="propria" >
                   Própria
@@ -468,7 +467,7 @@
                   <input type="radio" name="condicoesMoradia"      id="" value="areaDeOcupacao" >
                   Área de Ocupação
                 </label>   
-                   @elseif($id->conditions_home === 'areaDeOcupacao')
+                   @elseif($id->condicoes_moradia === 'areaDeOcupacao')
                 <label id="opcao1">
                   <input type="radio" name="condicoesMoradia"      id="" value="propria" >
                   Própria
@@ -495,7 +494,7 @@
                 <!-- <label style="padding-left: 1%;">Sexo:</label> -->
                 <span class="input-group-addon">Tipo de Construção</span>
                 <br>
-                @if($id->type_construct === 'alvenaria')
+                @if($id->tipo_construcao === 'alvenaria')
                 <label id="opcao1">
                   <input type="radio" name="tipoConstrucao"      id="" value="alvenaria" checked=""  >
                   Alvenaria
@@ -512,7 +511,7 @@
                   <input type="radio" name="tipoConstrucao"      id="" value="taipa"  >
                   Taipa
                 </label>
-                 @elseif($id->type_construct === 'madeira')
+                 @elseif($id->tipo_construcao === 'madeira')
                 <label id="opcao1">
                   <input type="radio" name="tipoConstrucao"      id="" value="alvenaria"  >
                   Alvenaria
@@ -529,7 +528,7 @@
                   <input type="radio" name="tipoConstrucao"      id="" value="taipa"  >
                   Taipa
                 </label>
-                @elseif($id->type_construct === 'mista')
+                @elseif($id->tipo_construcao === 'mista')
                 <label id="opcao1">
                   <input type="radio" name="tipoConstrucao"      id="" value="alvenaria"  >
                   Alvenaria
@@ -546,7 +545,7 @@
                   <input type="radio" name="tipoConstrucao"      id="" value="taipa"  >
                   Taipa
                 </label>
-                 @elseif($id->type_construct === 'taipa')
+                 @elseif($id->tipo_construcao === 'taipa')
                 <label id="opcao1">
                   <input type="radio" name="tipoConstrucao"      id="" value="alvenaria"  >
                   Alvenaria
@@ -571,13 +570,13 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Nº de Comodos</span>
-                <input  type="text" name="qtdComodos"     class="form-control" value="{{$id->rooms}}" id="" title="Informe um nome válido." >
+                <input  type="text" name="qtdComodos"     class="form-control" value="{{$id->comodos}}" id="" title="Informe um nome válido." >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group " id="" >
                 <span class="input-group-addon">Valor (Aluguel ou Financiamento)</span>
-                <input  type="text" name="valorAluguel"     class="form-control" value="{{$id->value_home}}" id="" title="Informe um nome válido." >
+                <input  type="text" name="valorAluguel"     class="form-control" value="{{$id->comodos}}" id="" title="Informe um nome válido." >
               </div>
             </div>
           </div>
@@ -594,7 +593,7 @@
             <div class="col-md-12 col-sm-6 col-xs-12">
               <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-1">
                   
-              @if($id->irregular_ocupation === 1)
+              @if($id->ocupacao_irregular === 1)
                 <label id="opcao1">
                   <input type="hidden" name="ocupacao irregular" value="0">
                   <input type="checkbox" name="ocupacao irregular" value="1" checked=""> Residem em área de ocupação irregular<br>
@@ -605,7 +604,7 @@
                   <input type="checkbox" name="ocupacao irregular" value="1" > Residem em área de ocupação irregular<br>
                 </label>
               @endif
-              @if($id->dependent_elderly === 1)
+              @if($id->idosos_dependentes === 1)
                 <label id="opcao1">
                 <input type="hidden" name="idosos dependentes" value="0">
                   <input type="checkbox" name="idosos dependentes" value="1" checked=""> Existência de idosos dependentes na família<br>
@@ -616,7 +615,7 @@
                   <input type="checkbox" name="idosos dependentes" value="1"> Existência de idosos dependentes na família<br>
                 </label>
               @endif
-               @if($id->deficient_family === 1)
+               @if($id->deficientes === 1)
                 <label id="opcao1">
               <input type="hidden" name="deficientes na familia" value="0">
                   <input type="checkbox" name="deficientes na familia" value="1" checked=""> Existência de deficientes na família<br>
@@ -628,7 +627,7 @@
                 </label>
                 @endif
 
-            @if($id->others === 1)
+            @if($id->outros === 1)
                 <label id="opcao1">
                  <input type="hidden" name="outros" value="0">
                   <input type="checkbox" name="outros" value="1" checked=""> Outros<br>
@@ -641,7 +640,7 @@
                 @endif
               </div>
               <div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-1">
-              @if($id->children_alone === 1)
+              @if($id->crianca_sozinha === 1)
                 <label id="opcao1">
                   <input type="hidden" name="criancaSozinhaDomicilio" value="0">
                   <input type="checkbox" name="criancaSozinhaDomicilio" value="1" checked=""> Crianças que ficam sozinhos no domicilio
@@ -652,7 +651,7 @@
                   <input type="checkbox" name="criancaSozinhaDomicilio" value="1" > Crianças que ficam sozinhos no domicilio
                 </label>
                 @endif
-                @if($id->unemployment === 1)
+                @if($id->desempregados === 1)
                 <label id="opcao1">
                   <input type="hidden" name="desemprego" value="0">
                   <input type="checkbox" name="desemprego" value="1" checked=""> Desemprego<br>
@@ -664,7 +663,7 @@
                 </label>
                 @endif
                 <br>
-                @if($id->lowIcome === 1)
+                @if($id->baixa_renda === 1)
                 <label id="opcao1">
                   <input type="hidden" name="baixaRenda" value="0">
                   <input type="checkbox" name="baixaRenda" value="1" checked=""> Baixa 
@@ -690,14 +689,14 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Profissão</span>
-                <input  type="text" name="profissao"     class="form-control" value="{{$id->profession}}" id="" title="Informe um nome válido."  >
+                <input  type="text" name="profissao"     class="form-control" value="{{$id->profissao}}" id="" title="Informe um nome válido."  >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="radio3">
                 <span class="input-group-addon">Carteira Assinada</span>
                 <br>
-                @if($id->wallet_signed === 'sim')
+                @if($id->carteira_assinada === 'sim')
                 <label id="opcao2">
                   <input type="radio" name="carteiraAssinada"      id="" value="sim" checked=""  >
                   Sim
@@ -724,7 +723,7 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Renda Mensal do usuário </span>
-                <input  type="number" name="rendaFamiliar"  value="{{$id->income_family}}" required=""  >
+                <input  type="number" name="rendaMensalUsuario"  value="{{$id->renda}}" required=""  >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -732,7 +731,7 @@
                 <span class="input-group-addon">Reside com:</span>
                 <br>
 
-                @if($id->family_reside == 'familia')
+                @if($id->reside_familia == 'familia')
                 <label id="opcao3">
                 <input type="hidden" name="reside" value="0">
                   <input type="radio" name="reside"      id="" value="familia"  checked="" >
@@ -749,7 +748,7 @@
                   Outros
                   <!-- <input type="text" name="reside"      placeholder="Qual ?" style="width: 70%"> -->
                 </label>
-                @elseif($id->family_reside == 'soziho')
+                @elseif($id->reside_familia == 'soziho')
                 <label id="opcao3">
                 <input type="hidden" name="reside" value="0">
                   <input type="radio" name="reside"      id="" value="familia"  >
@@ -789,54 +788,7 @@
             </div>
           </div>
           <hr>
-          <!-- <div  class="row" id="box1">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                
-                @if($id->bolsa_familia === 1)
-                <label id="opcao4">
-                <input type="hidden" name="BolsaFamilia" value="0">
-                  <input type="checkbox" name="BolsaFamilia" value="1" checked="">Bolsa Família<br>
-                </label>
-                @else
-                   <label id="opcao4">
-                <input type="hidden" name="BolsaFamilia" value="0">
-                  <input type="checkbox" name="BolsaFamilia" value="1" >Bolsa Família<br>
-                </label>
-                @endif
-  
-                @if($id->loasbpc === 1)
-                <label id="opcao4">
-                <input type="hidden" name="LOAS" value="0">
-                  <input type="checkbox" name="LOAS" value="1" checked="">LOAS/BPC<br>
-                </label>
-                @else
-                <label id="opcao4">
-                <input type="hidden" name="LOAS" value="0">
-                  <input type="checkbox" name="LOAS" value="1">LOAS/BPC<br>
-                </label>
-                @endif
-
-              @if($id->previdencia === 1)
-                    <label id="opcao4">
-                    <input type="hidden" name="Previdencia" value="0">
-                      <input type="checkbox" name="Previdencia" value="1" checked=""> Previdência Social<br>
-                    </label>
-              @else
-                  <label id="opcao4">
-                    <input type="hidden" name="Previdencia" value="0">
-                      <input type="checkbox" name="Previdencia" value="1" > Previdência Social<br>
-                    </label>
-              @endif
-                
-              
-            </div>
-             <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="input-group">
-                <span class="input-group-addon">Valor R$</span>
-                <input  type="number" name="valorBeneficio" class="form-control" value="{{$id->family_benefits_value}}" id="" title="Informe um valor válido." >
-              </div>
-              </div>
-          </div> -->
+          
                   <div  class="row" id="box1">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <span class="input-group-addon">Benefício
@@ -865,7 +817,7 @@
                 <input style=height:1%!important; type="number" class="form-control" name="previdencia" required="" 
                  value="{{$id->previdencia}}" /><span class=input-group-addon><span>R$</span></span></div>
                 </label>
-           
+
                  <label id="opcao4">
                 <div class=input-group><span class=input-group-addon> Renda Total</span>
                 <input style=height:1%!important; type="number" class="form-control" disabled="" name="rendaTotal" required="" 
@@ -903,15 +855,15 @@
         foreach ($membros as $m) {
         $linha0 = " <tr>";
         $linha18 = "<th><input type='number' class='form-control' id='nisMembro' name='nis$loop' value='{$m->nis}'></th>";
-        $linha1 = "<td><input type='text' class='form-control' name='nomeMembro$loop'  value='{$m->name}' ></td>"; 
-        $linha2 = "<td><input type='text' class='form-control' name='parentesco$loop'  value='{$m->kinship}'></td>";
+        $linha1 = "<td><input type='text' class='form-control' name='nomeMembro$loop'  value='{$m->nome}' ></td>"; 
+        $linha2 = "<td><input type='text' class='form-control' name='parentesco$loop'  value='{$m->parentesco}'></td>";
         $linha3 = "<td style=width:10%><input type='number' class='form-control' name='idade{$loop}' value='{$m->idade}'></td>";
           $linha4 = "<td>
           <select name='sexo{$loop}' class='form-control'>";
-       if ($m->sex == 'm') {
+       if ($m->sexo == 'm') {
         $linha5 = "<option value='m' selected=''>Masculino</option> <option value='f'>Feminino</option>";
         $linha6 ='';
-         }elseif($m->sex == 'f'){
+         }elseif($m->sexo == 'f'){
           $linha5= '';
           $linha6 = "<option value='m' >Masculino</option> <option value='f'  selected=''>Feminino</option>";
        }
@@ -926,7 +878,7 @@
         $linha13 ="<div class=input-group><span class=input-group-addon> Bolsa Família</span><input style=height:1%!important; type='number' class='form-control' id='bolsaFamiliaMembro' name='bolsaFamilia{$loop}' value={$m->bolsaFamilia} /><span class=input-group-addon><span>R$</span></span></div>";
         $linha14 = "<br>";
         $linha15 = "<div class=input-group><span class=input-group-addon> Previdência Social</span><input style=height:1%!important; type='number' class='form-control' id='previdenciaMembro' name='previdencia{$loop}' value={$m->previdencia} /><span class=input-group-addon><span>R$</span></span></div> <br>";
-        $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->incomeUser} /><span class=input-group-addon><span>R$</span></span></div>";        
+        $linha19 = "<div class=input-group><span class=input-group-addon> Renda Mensal</span><input style=height:1%!important; type='number' class='form-control' id='rendaMensalUser' name='rendaMensalUser{$loop}' value={$m->renda} /><span class=input-group-addon><span>R$</span></span></div>";        
         $linha16 = "</th>";
         $linha17 = " </tr>";                            
          echo "".$linha0;

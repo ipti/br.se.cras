@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class vulnerabilities extends Model
+class vulnerabilidade extends Model
 {
-    protected $table = 'vulnerabilities';
+    protected $table = 'vulnerabilidade';
   	protected $fillable = ['id', 
-  						 'irregular_ocupation',
-  						 'children_alone',
-  						 'dependent_elderly',
-  						 'unemployment',
-  						 'deficient_family',
-  						 'lowIcome',
-  						 'others',
+  						 'ocupacao_irregular',
+  						 'crianca_sozinha',
+  						 'idosos_dependentes',
+  						 'desempregados',
+  						 'deficientes',
+  						 'baixa_renda',
+  						 'outros',
   						 ];
   
  	 public  $timestamps =false;

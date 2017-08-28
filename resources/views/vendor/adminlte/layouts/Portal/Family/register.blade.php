@@ -1,7 +1,7 @@
 @extends('adminlte::layouts.app')
 @section('main-content')
 <div class="Cadastrar">
-  <form action="{{url('/familyCdst')}}"  method="post" name="formulario" id="formulario">
+  <form action="{{url('/familyCdst')}}"  method="post" name="formulario" id="formulario" >
     {{csrf_field()}}
     <div class="box box-info">
       <table class="table table-striped table-bordered" width="100%" border="0" align="center" cellspacing="0" id="t_abas">
@@ -50,7 +50,7 @@
            <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Nome</span>
-              <input  type="text" name="nome" class="form-control" placeholder="" id="name" title="Informe um nome válido." >
+              <input  type="text" name="nome" class="form-control" placeholder="" id="name" title="Informe um nome válido." />
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -410,9 +410,9 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Renda Mensal do usuário</span>
-                <input  type="number" name="rendaFamiliar"   style="width: 100%;"  >
+                <input  type="number" name="rendaMensalUsuario"   style="width: 100%;"  >
                 <div class="input-group-addon">
-                      <i class="fa  fa-usd"></i>
+                      R$
                     </div>
               </div>
             </div>

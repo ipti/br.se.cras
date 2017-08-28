@@ -66,23 +66,23 @@
                       @if(count($identificacao) != 0 || count($membro) != 0)
                       @foreach($identificacao as $id)
                        <tr>
-                          <th style="text-align: center;">{{$id->name}}</th>
-                          <th style="text-align: center;">{{$id->rg_number}}-{{$id->rg_emission_organ}}-{{$id->rg_UF}} | {{$id->NIS}}</th>
+                          <th style="text-align: center;">{{$id->nome}}</th>
+                          <th style="text-align: center;">{{$id->numero_rg}}-{{$id->data_emissao_rg}}-{{$id->uf_rg}} | {{$id->NIS}}</th>
                           <th style="text-align: center;">{{$id->cpf}} </th>
-                          <th style="text-align: center;">{{$id->solicitation}}</th>
-                          <th style="text-align: center;">{{$id->transfer}}</th>
-                          <th style="text-align: center;">{{$id->result}}</th>
+                          <th style="text-align: center;">{{$id->solicitacao}}</th>
+                          <th style="text-align: center;">{{$id->encaminhamento}}</th>
+                          <th style="text-align: center;">{{$id->resultado}}</th>
                           
                        </tr>
                      @endforeach
                       @foreach($membro as $m)
                        <tr>
-                          <th style="text-align: center;">{{$m->name}}</th>
+                          <th style="text-align: center;">{{$m->nome}}</th>
                           <th style="text-align: center;">Informação não cadastrada</th>
                           <th style="text-align: center;">Informação não cadastrada</th>
-                          <th style="text-align: center;">{{$m->solicitation}}</th>
-                          <th style="text-align: center;">{{$m->transfer}}</th>
-                          <th style="text-align: center;">{{$m->result}}</th>
+                          <th style="text-align: center;">{{$m->solicitacao}}</th>
+                          <th style="text-align: center;">{{$m->encaminhamento}}</th>
+                          <th style="text-align: center;">{{$m->resultado}}</th>
                           
                        </tr>
                      @endforeach

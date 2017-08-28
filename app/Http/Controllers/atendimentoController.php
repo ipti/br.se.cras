@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\attendance_daily;
+use App\Models\atendimentos;
 use Redirect;
 use DB;
 use Alert;
@@ -25,50 +25,29 @@ class atendimentoController extends Controller
 
     public function index()
     {
-              $data = date('y-m-d');
-        $identificacao = DB::select(
-    'SELECT *, Identification_person.name as nomeUser,attendance_daily.data as dataAtendimento, technician.name as tecnicoNome, technician.id as idTecnico  
-                FROM Identification_person, address, situation_financial,vulnerabilities, attendance_daily, technician
-                 where  Identification_person.id_address = address.id  and
-                Identification_person.id_situation_FInancial = situation_financial.id and
-                Identification_person.id_Vulnerabilities = vulnerabilities.id  AND
-                Identification_person.id  = attendance_daily.id_Identification_person AND
-                attendance_daily.technician = technician.id');
+        // $dataInicio = date('Y-m-d');
+        
 
-        // dd($identificacao);
+            $identificacao = DB::table('atendimentos')
+                ->join('identificacao_usuario', 'atendimentos.id_identificacao_usuario', '=', 'identificacao_usuario.id')
+                ->join('tecnico', 'atendimentos.tecnico', '=', 'tecnico.id')
+                ->select('*','identificacao_usuario.nome as nome_usuario','tecnico.nome as nome_tecnico' 
+                            ,'atendimentos.id_identificacao_usuario as id_usuario','atendimentos.id as id_atendimento')->get();
 
-        // $membro = DB::select('SELECT * FROM attendance_daily, family_composition where ');   
+            //  dd($identificacao);
 
-        $membro = DB::select('SELECT *, technician.name as tecnicoNome, technician.id as idTecnico  
-                             from family_composition as fc, attendance_daily as atd, technician
-                                where atd.id_family_composition = fc.id  AND  atd.technician = technician.id');
+            $membro = DB::table('atendimentos')
+            ->join('membro_familiar', 'atendimentos.id_membro_familiar','=','membro_familiar.id')
+            ->join('tecnico', 'atendimentos.tecnico', '=', 'tecnico.id')
+            ->select('*', 'tecnico.nome as nome_tecnico','atendimentos.id_membro_familiar as id_usuario',
+            'membro_familiar.nome as nome_usuario'
+            ,'atendimentos.id as id_atendimento')->get();
+            
+        // dd($membro);
+            $totalAtendimento = DB::table('atendimentos')->select('total')->count();
 
-          // $membro = DB::table('attendance_daily')
-          // ->join('family_composition', 'attendance_daily.id_family_composition','=','family_composition.id')
-          // ->select('*')->get();
-
-          // dd($membro);
-
-
-        for ($i=0; $i < count($membro) ; $i++) {
-            if (!is_null($membro[$i]->data)) {
-                $dataInicial = $membro[$i]->data;
-                $dataP = explode('-', $membro[$i]->data);
-                $dataInicial = $dataP[2] . '/' . $dataP[1] . '/' . $dataP[0];
-                $membro[$i]->data = $dataInicial;
-            }
-        }
-
-        for ($i=0; $i < count($identificacao) ; $i++) {
-            if (!is_null($identificacao[$i]->dataAtendimento)) {
-                $dataInicial = $identificacao[$i]->dataAtendimento;
-                $dataP = explode('-', $identificacao[$i]->dataAtendimento);
-                $dataInicial = $dataP[2] . '/' . $dataP[1] . '/' . $dataP[0];
-                $identificacao[$i]->dataAtendimento = $dataInicial;
-            }
-        }
-
-
+            $totalFamilias = DB::table('identificacao_usuario')->select('totalFamilias')->count();
+            // dd($totalAtendimento);
         return view('vendor.adminlte.layouts.Portal.Atendimento.attendance', compact('identificacao', 'membro'));
   
     }
@@ -79,14 +58,14 @@ class atendimentoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($id) {        
-        $identificacao = DB::select('SELECT DISTINCT * FROM Identification_person where   Identification_person.id = '.$id); 
-        // dd($identificacao);           
-     $membro = DB::select('SELECT * FROM family_composition as fc where fc.id_Identification_person ='.$id);
+        $identificacao = DB::select('SELECT DISTINCT * FROM identificacao_usuario where   identificacao_usuario.id = '.$id); 
+        
+     $membro = DB::select('SELECT * FROM membro_familiar as fc where fc.id_identificacao_usuario ='.$id);
             // dd($membro);
-        $tecnicos = DB::select('SELECT * FROM technician');
+        $tecnicos = DB::select('SELECT * FROM tecnico');
 
-        $servico = DB::select('SELECT * FROM service');
-            //dd($tecnicos);
+        $servico = DB::select('SELECT * FROM servico');
+            // dd($servico);
         
            // dd($identificacao[0]->id);
        // dd($membro);
@@ -103,24 +82,21 @@ class atendimentoController extends Controller
     public function store(Request $reqeust, $id)
     {
          $dados = $this->request->all();
-            //dd($dados);
-         // $teste = is_null($dados['id_user'];
 
-         //    dd($teste);
          if (is_null($dados['id_user'])) {
             $dados['id_user'] = $id;
 
             $dataP = explode('/', $dados['data_atendimento']);
             $dataSaida = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
             $dados['data_atendimento'] =  $dataSaida;
-            $atendimento  = DB::table('attendance_daily')->insert([
-            'service'                    =>$dados['servico'],
-            'solicitation'               =>$dados['socicitacao'],
-            'transfer'                   =>$dados['providencia'],
-            'result'                     =>$dados['resultado'],
-            'technician'                 =>$dados['tecnico'],
-            'id_Identification_person'   =>$id,
-            'id_family_composition'      =>0  ,
+            $atendimento  = DB::table('atendimentos')->insert([
+            'servico'                    =>$dados['servico'],
+            'solicitacao'               =>$dados['socicitacao'],
+            'encaminhamento'                   =>$dados['providencia'],
+            'resultado'                     =>$dados['resultado'],
+            'tecnico'                 =>$dados['tecnico'],
+            'id_identificacao_usuario'   =>$id,
+            'id_membro_familiar'      =>0  ,
             'data'                       =>$dados['data_atendimento'],
              ]); }else{
              $id = $dados['id_user'];
@@ -128,21 +104,21 @@ class atendimentoController extends Controller
             $dataSaida = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
             $dados['data_atendimento']   =  $dataSaida;
 
-            $atendimento  = DB::table('attendance_daily')->insert([
-            'service'                    =>$dados['servico'],
-            'solicitation'               =>$dados['socicitacao'],
-            'transfer'                   =>$dados['providencia'],
-            'result'                     =>$dados['resultado'],
-            'technician'                 =>$dados['tecnico'],
-            'id_Identification_person'   =>0,
+            $atendimento  = DB::table('atendimentos')->insert([
+            'servico'                    =>$dados['servico'],
+            'solicitacao'               =>$dados['socicitacao'],
+            'encaminhamento'                   =>$dados['providencia'],
+            'resultado'                     =>$dados['resultado'],
+            'tecnico'                 =>$dados['tecnico'],
+            'id_identificacao_usuario'   =>0,
             'data'                       =>$dados['data_atendimento'],
-            'id_family_composition'      =>$id
+            'id_membro_familiar'      =>$id
         ]);
         }
          if ($atendimento == true) {
      DB::commit();
         alert()->success('', 'Atendimento Registrado com sucesso!')->autoclose(2000);
-         return Redirect::to('/family');
+         return Redirect::to('/attendance');
     }else{
              DB::rollback();
          alert()->error('Verifique as informações', 'Não foi possível registrar o atendimento')->autoclose(3000);
@@ -159,6 +135,7 @@ class atendimentoController extends Controller
     public function show($id)
     {
         //
+        
     }
 
     /**
@@ -167,9 +144,57 @@ class atendimentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $idAtendimento)
     {
-        //
+
+        $identificacao = DB::table('atendimentos')
+        ->join('identificacao_usuario', 'atendimentos.id_identificacao_usuario', '=', 'identificacao_usuario.id')
+        ->select('*' , 'atendimentos.id as id_atendimento')->where([['atendimentos.id', $idAtendimento],
+                        ['atendimentos.id_identificacao_usuario', $id]])->get();
+
+        // dd($identificacao);
+
+     $membro = DB::table('atendimentos')
+                            ->join('membro_familiar', 'atendimentos.id_membro_familiar','=','membro_familiar.id')
+                            ->select('*', 'atendimentos.id as id_atendimento')->where([['atendimentos.id', $idAtendimento],
+                            ['atendimentos.id_membro_familiar', $id]])->get();
+            //   dd($membro);
+            // dd(count($identificacao));
+        if(count($identificacao) > 0){
+            if (!is_null($identificacao[0]->data)) {
+                $dataInicial = $identificacao[0]->data;
+                $dataP = explode('-', $identificacao[0]->data);
+                $dataInicial= $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
+                $identificacao[0]->data = $dataInicial;
+            }
+            $tecnico = DB::table('tecnico')->select('*')->where('id', $identificacao[0]->tecnico)->get();
+            // dd($tecnico);
+            $tecnicos = DB::select('SELECT * FROM tecnico where NOT id ='.$tecnico[0]->id);
+            // dd($tecnicos);
+            $membro = DB::table('membro_familiar')->select('*')->where('id_identificacao_usuario', $id)->get();
+            $servico = DB::table('servico')->get();
+            return view('vendor.adminlte.layouts.Portal.Atendimento.attendanceEdit', 
+            compact('identificacao', 'tecnico','tecnicos', 'membro', 'servico'));                  
+            }else{
+            $identificacao = $membro;   
+                //  dd($identificacao);
+            if (!is_null($identificacao[0]->data)) {
+                $dataInicial = $identificacao[0]->data;
+                $dataP = explode('-', $identificacao[0]->data);
+                $dataInicial= $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
+                $identificacao[0]->data = $dataInicial;
+            }
+            $tecnico = DB::table('tecnico')->select('*')->where('id', $identificacao[0]->tecnico)->get();
+            // dd($tecnico);
+            $tecnicos = DB::select('SELECT * FROM tecnico where NOT id ='.$tecnico[0]->id);
+            $membro = DB::table('membro_familiar')->select('*')->where('id_identificacao_usuario', $id)->get();
+            $servico = DB::table('servico')->get();
+            return view('vendor.adminlte.layouts.Portal.Atendimento.attendanceEdit', 
+            compact('identificacao', 'tecnico','tecnicos', 'membro', 'servico'));                  
+            
+        }
+      
+    //   return view('vendor.adminlte.layouts.Portal.Atendimento.attendanceEdit', compact('identificacao', 'membro'));      
     }
 
     /**
@@ -179,9 +204,61 @@ class atendimentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $idAtendimento)
     {
-        //
+        DB::beginTransaction();        
+        $dados = $this->request->all();
+        // dd($dados);
+       
+
+            $consulta = DB::select('SELECT * FROM atendimentos WHERE  id='.$idAtendimento);
+            // dd($consulta);
+            // dd($consulta[0]->id_identificacao_usuario);
+            if ($consulta[0]->id_identificacao_usuario != 0) {
+            $id = $dados['id_user'] = $consulta[0]->id_identificacao_usuario;
+            $dataP = explode('/', $dados['data_atendimento']);
+            $dataSaida = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
+            $dados['data_atendimento'] =  $dataSaida;
+            
+            $atendimento  = DB::table('atendimentos')->where('id', $consulta[0]->id)->update([  
+            'servico'                    =>$dados['servico'],
+            'solicitacao'                =>$dados['socicitacao'],
+            'encaminhamento'             =>$dados['providencia'],
+            'resultado'                  =>$dados['resultado'],
+            'tecnico'                    =>$dados['tecnico'],
+            'id_identificacao_usuario'   =>$id,
+            'id_membro_familiar'         =>0  ,
+            'data'                       =>$dados['data_atendimento'],
+             ]); 
+            }else{
+                // dd($dados);
+           $id = $consulta[0]->id_membro_familiar;
+            $dataP = explode('/', $dados['data_atendimento']);
+            $dataSaida = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
+            $dados['data_atendimento']   =  $dataSaida;
+
+            $atendimento  = DB::table('atendimentos')->where('id', $consulta[0]->id)->update([  
+            'servico'                   =>$dados['servico'],
+            'solicitacao'               =>$dados['socicitacao'],
+            'encaminhamento'            =>$dados['providencia'],
+            'resultado'                 =>$dados['resultado'],
+            'tecnico'                   =>$dados['tecnico'],
+            'id_identificacao_usuario'  =>0,
+            'data'                      =>$dados['data_atendimento'],
+            'id_membro_familiar'        =>$id
+        ]);
+        }
+        // dd($atendimento);
+        
+         if ($atendimento == 1) {
+     DB::commit();
+        alert()->success('', 'Atendimento Registrado com sucesso!')->autoclose(2000);
+         return Redirect::to('/family');
+    }else{
+             DB::rollback();
+         alert()->error('Verifique as informações', 'Não foi possível registrar o atendimento')->autoclose(3000);
+         return Redirect::to('/family');
+    }
     }
 
     /**

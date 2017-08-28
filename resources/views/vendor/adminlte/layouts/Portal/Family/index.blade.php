@@ -42,16 +42,16 @@
                           <th style="text-align: center;">Data de Nascimento</th>
                           <th style="text-align: center;">Entrada</th>
                           <th style="text-align: center;">Visualizar/Editar Cadastro </th>
-                          <th style="text-align: center;">Controle de Atendimentos </th>
+                          <th style="text-align: center;">Novo Atendimento </th>
                         </tr>
                       </thead>
                       <tbody>
                       @forelse($identificacao as $id)
                     	 <tr>
                     	   	<th style="text-align: center;">{{$id->id}}</th>
-                    	   	<th style="text-align: center;">{{$id->name}}</th>
-                    	   	<th style="text-align: center;">{{$id->birth}}</th>
-                    	   	<th style="text-align: center;">{{$id->date_initial}}</th>
+                    	   	<th style="text-align: center;">{{$id->nome}}</th>
+                    	   	<th style="text-align: center;">{{$id->data_nascimento}}</th>
+                    	   	<th style="text-align: center;">{{$id->data_inicial}}</th>
                     	   	<th style="text-align: center;">
                            <a href="{{url("/family/$id->id")}}" ><i class="fa fa-search"></i> 
                           </th>

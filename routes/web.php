@@ -22,13 +22,20 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/family/{id}',                                  'Family_compositionController@show');
      Route::post('/family/{id}',                                 'Family_compositionController@update');
 
-         //geral 
+     //geral 
      Route::get('/home',                               	  'Family_compositionController@atendimentosDiario');
 
      // rotas responsáveis pelos atendimentos 
      Route::get('/attendance/{id}',                        'atendimentoController@create');
      Route::post('/attendance/{id}',                       'atendimentoController@store');
      Route::get('/attendance',                             'atendimentoController@index');
+
+     
+     Route::get(' /attendance/edit/{id}/{idAtendimento}',                       'atendimentoController@edit');
+     Route::post(' /attendance/edit/{id}/{idAtendimento}',                       'atendimentoController@update');
+     
+     
+     
     //   FIM rotas responsáveis pelos atendimentos
 
 

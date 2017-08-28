@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class family_composition extends Model
+class membro_familiar extends Model
 {
-  protected $table = 'family_composition';
+  protected $table = 'membro_familiar';
   protected $fillable = ['id', 
-  						 'id_Identification_person',
-  						 'name',
-  						 'kinship',
-  						 'Idade',
-  						 'sex',
+  						 'id_identificacao_usuario',
+  						 'nome',
+  						 'parentesco',
+  						 'idade',
+  						 'sexo',
   						 'nis',
   						 'loas',
   						 'bolsaFamilia',
   						 'previdencia',
-               'incomeUser',];
+              			 'renda',];
   
   public  $timestamps =false;
 

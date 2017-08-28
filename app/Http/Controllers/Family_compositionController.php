@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\identification_person;
+use App\Models\identificacao_usuario;
 use DB;
 use Alert;
 use Session;
@@ -15,28 +15,35 @@ class Family_compositionController extends Controller{
 * @return \Illuminate\Http\Response
 */
     protected $identificacao;
-        public function __construct(Request $request, Identification_person $identificacao )
+        public function __construct(Request $request, identificacao_usuario $identificacao )
     {
         $this->request = $request;
         $this->identificacao = $identificacao;
     }
+
+
 public function index()
 {
-  $identificacao = DB::select('SELECT * FROM Identification_person');
+  $identificacao = DB::select('SELECT * FROM identificacao_usuario');
             for ($i=0; $i < count($identificacao); $i++) {
                if (isset($identificacao[$i])) {
-                // $identificacao['birth'] = $identificacao['birth'];
-               $data = $identificacao[$i]->birth;
-               $dataP = explode('-', $data);
-               $dataAniversario = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-               $identificacao[$i]->birth = $dataAniversario;
+                    $data = $identificacao[$i]->data_nascimento;
+                    $dataP = explode('-', $data);
+                    $dataAniversario = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
+                    $identificacao[$i]->data_nascimento = $dataAniversario;
 
-               $dataEntrada = $identificacao[$i]->date_initial;
-               $dataP = explode('-', $dataEntrada);
-               $dataEntrada = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-               $identificacao[$i]->date_initial = $dataEntrada;
-              }
-
+                    $dataEntrada = $identificacao[$i]->data_inicial;
+                    $dataP = explode('-', $dataEntrada);
+                    $dataEntrada = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
+                    $identificacao[$i]->data_inicial = $dataEntrada;
+                    if (!is_null($identificacao[$i]->data_final)) {                        
+                        $dataSaida = $identificacao[$i]->data_final;
+                        $dataP = explode('-', $dataSaida);
+                        $dataSaida = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
+                        $identificacao[$i]->data_final  = $dataSaida;
+                    }
+                }
+            
             }
     return view('vendor.adminlte.layouts.Portal.Family.index', compact('identificacao'));
 }
@@ -59,54 +66,34 @@ public function create()
 public function store(Request $request)
 {
     $dados = $this->request->all();
-$mensagens = array(
-    // 'numero.max'               =>  "Campo maior que o esperado",
-    // 'numero.min'               =>  "Campo menor que o esperado ",
-    // 'data_entrada.required'    =>  "Data de Entrada é um campo obrigatório.",
-    'nome.required'            =>  "O campo nome é obrigatório",
-    // 'apelido.max'              =>  "o campo Apelido muito grande",
-    // 'data_nascimento.required' =>  "Informe uma data de nascimento válida",
-    // 'NumeroCadastro.required'  =>  "Campo obrigatório número de cadastro obrigatório",
-    // 'nis.required'             =>  " O campo NIS é obrigatório"                       ,
-    // 'nis.max'                  =>  " Valor digitado no campo NIS maior que o permitido",
-    // 'rgNumero.required'        =>  "Campo RG é obrigatório",
-    // 'RgEmissao.required'       =>  "Data de emissão do ŔG é um campo obrigatório",
-    // 'RGuf.required'            =>  "Campo de UF do RG é um campo obrigatório",
-    // 'RgOrgaoEmissor.required'  =>  "O campo de Órgão emissor do RG é obrigatório"
-  );
+    // dd($dados);
+//     $mensagens = array(
+//     'nome.required'                       =>  "Nome do usuário é obrigatório",
+//     'data_entrada.required'               =>  " Data de Entrada é obrigatório",
+//   );
     
     if (isset($dados['cpf'])) {
-        
         $cpf = explode('.',$dados['cpf']);
         $cpf = $cpf[0].''.$cpf[1].''.$cpf[2];
         $cpf = explode('-',$cpf);
         $cpf = $cpf[0].''.$cpf[1];
         $dados['cpf'] = $cpf;
     }else{
-        $dados['cpf'] = '00000000000';
+        $cpf = $dados['cpf'] = '00000000000';
     }
-     $validator = Validator::make( $request->all(), [
-            // 'numero'                =>'required|min:1|max:11',
-            // 'data_entrada'          =>'required',
-            'nome'                  =>'required|min:8|max:255',
-            // 'apelido'               =>'min:0|max:150',
-            // 'data_nascimento'       =>'required',
-            // 'NumeroCadastro'        =>'required',
-            // 'nis'                   =>'required|max:11',
-            // 'rgNumero'              =>'required',
-            // 'RgEmissao'             =>'required',
-            // 'RGuf'                  =>'required',
-            // 'RgOrgaoEmissor'        =>'required',
-           ],$mensagens);
+    //  $validator = Validator::make( $request->all(), [
+    //         'data_entrada'          =>'required',
+    //         'nome'                  =>'required|min:8|max:255',
+    //        ],$mensagens);
 
-       if ($validator->fails()) {
-       $validator->setAttributeNames($mensagens);
-            return redirect('/familyCdst')->withErrors($validator)->withInput();
-        }
+    //    if ($validator->fails()) {
+    //    $validator->setAttributeNames($mensagens);
+    //         return redirect('/familyCdst')->withErrors($validator)->withInput();
+    //     }
         if (is_null($dados['profissao'])) {
         $dados['profissao']= '';
-        }if (is_null($dados['rendaFamiliar'])) {
-        $dados['rendaFamiliar'] = 0;
+        }if (is_null($dados['rendaMensalUsuario'])) {
+        $dados['rendaMensalUsuario'] = 0;
         }
         if (is_null($dados['deficiencia'])) {
         $dados['deficiencia'] = "";
@@ -122,69 +109,81 @@ $mensagens = array(
         $dataP = explode('/', $dados['data_saida']);
         $dataSaida = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
       }
-        $dados['birth'] = $dados['data_nascimento'];
-        $dataP = explode('/', $dados['birth']);
+      if (!is_null($dados['data_nascimento'])) {
+        $dados['aniversario'] = $dados['data_nascimento'];
+        $dataP = explode('/', $dados['aniversario']);
         $dataAniversario = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
-        $dados['rg_emission_date'] = $dados['RgEmissao'];
-        $dataP = explode('/', $dados['rg_emission_date']);
+      }else{
+        $dados['aniversario'] = null;        
+      }
+      if (!is_null($dados['RgEmissao'])) {
+        $dados['data_emissao_rg'] = $dados['RgEmissao'];
+        $dataP = explode('/', $dados['data_emissao_rg']);
         $dataRg = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
-        $dados['data_entrada'] = $dados['data_entrada'];
-        $dataP = explode('/', $dados['data_entrada']);
+      }else{
+        $dataRg = $dados['data_emissao_rg'] = null;
+      }
+      if (!is_null($dados['data_entrada'])) {        
+        $dados['data_inicial'] = $dados['data_entrada'];
+        $dataP = explode('/', $dados['data_inicial']);
         $dataEntrada = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
-
-        $situacaoFinanceira = DB::table('situation_financial')->insertGetId([
-            'profession'=>$dados['profissao'],
-            'income_family'=>$dados['rendaFamiliar'],
-            'family_reside'=>$dados['reside'],
-            'wallet_signed'=>$dados['carteiraAssinada'],
-            // 'family_benefits_value'=>$dados['valorBeneficio'],
+      }else{
+        $dados['data_inicial'] = null;
+      }
+        $situacaoFinanceira = DB::table('situacao_financeira')->insertGetId([
+            'profissao'=>$dados['profissao'],
+            'renda'=>$dados['rendaMensalUsuario'],
+            'reside_familia'=>$dados['reside'],
+            'carteira_assinada'=>$dados['carteiraAssinada'],
             'bolsa_familia'=>$dados['bolsaFamilia'],
             'loasbpc'=>$dados['loas'],
             'previdencia'=>$dados['previdencia'],
-
         ]);
-        $vulnerabilidade = DB::table('vulnerabilities')->insertGetId([
-            'irregular_ocupation' =>$dados['ocupacao_irregular'],
-            'children_alone'=>$dados['criancaSozinhaDomicilio'],
-            'dependent_elderly'=>$dados['idosos_dependentes'],
-            'unemployment'=>$dados['desemprego'],
-            'deficient_family'=>$dados['deficientes_na_familia'],
-            'lowIcome'=>$dados['baixaRenda'],
-            'others'=>$dados['outros'],
+            // dd($situacaoFinanceira );
+        $vulnerabilidade = DB::table('vulnerabilidade')->insertGetId([
+            'ocupacao_irregular' =>$dados['ocupacao_irregular'],
+            'crianca_sozinha'=>$dados['criancaSozinhaDomicilio'],
+            'idosos_dependentes'=>$dados['idosos_dependentes'],
+            'desempregados'=>$dados['desemprego'],
+            'deficientes'=>$dados['deficientes_na_familia'],
+            'baixa_renda'=>$dados['baixaRenda'],
+            'outros'=>$dados['outros'],
             ]);
-
-        $endereco  = DB::table('address')->insertGetId([
-            'phone'  =>$dados['telefone'],
-            'address'=>$dados['address'],
-            'reference_point'=>$dados['pontoReferencia'],
-            'conditions_home'=>$dados['condicoesMoradia'],
-            'type_construct' =>$dados['tipoConstrucao'],
-            'rooms'          =>$dados['qtdComodos'],
-            'value_home'     =>$dados['valorAluguel'],
+            // dd($vulnerabilidade);
+        $endereco  = DB::table('endereco')->insertGetId([
+            'telefone'  =>$dados['telefone'],
+            'endereco'=>$dados['address'],
+            'ponto_referencia'=>$dados['pontoReferencia'],
+            'condicoes_moradia'=>$dados['condicoesMoradia'],
+            'tipo_construcao' =>$dados['tipoConstrucao'],
+            'comodos'          =>$dados['qtdComodos'],
+            'valor_aluguel'     =>$dados['valorAluguel'],
         ]);
-        $identificacaoPessoa = DB::table('Identification_person')->insertGetId([
-            'id_address' =>$endereco,
-            'id_situation_FInancial'=>$situacaoFinanceira,
-            'id_Vulnerabilities'  => $vulnerabilidade,
-            'name'      => $dados['nome'],
-            'nick_name' => $dados['apelido'],
-            'birth'     =>  $dataAniversario,
+        // dd($endereco);
+        $identificacaoPessoa = DB::table('identificacao_usuario')->insertGetId([
+            'id_endereco' =>$endereco,
+            'id_situacao_financeira'=>$situacaoFinanceira,
+            'id_vulnerabilidade'  => $vulnerabilidade,
+            'nome'      => $dados['nome'],
+            'apelido' => $dados['apelido'],
+            'data_nascimento'     =>  $dataAniversario,
             'NIS'             =>$dados['nis'],
-            'rg_number'       =>$dados['rgNumero'],
-            'rg_emission_date'=>$dataRg,
-            'register_number' =>$dados['NumeroCadastro'],
-            'rg_UF'           =>$dados['RGuf'],
-            'rg_emission_organ'=>$dados['RgOrgaoEmissor'],
+            'numero_rg'       =>$dados['rgNumero'],
+            'data_emissao_rg'=>$dataRg,
+            'certidao_nascimento' =>$dados['NumeroCadastro'],
+            'uf_rg'           =>$dados['RGuf'],
+            'emissao_rg'=>$dados['RgOrgaoEmissor'],
             'cpf'           => $cpf,
-            'deficient'     =>$dados['deficiente'],
-            'deficient_type'     =>$dados['deficiencia'],
-            'mother'        =>$dados['mae'],
-            'father'        =>$dados['pai'],
-            'situation'   =>$dados['estadoCivil'],
-            'schooling'   =>$dados['escolaridade'],
-            'date_initial'   =>$dataEntrada,
-            'date_end'   =>$dataSaida,
+            'deficiente'     =>$dados['deficiente'],
+            'deficiencia'     =>$dados['deficiencia'],
+            'mae'        =>$dados['mae'],
+            'pai'        =>$dados['pai'],
+            'estado_civil'   =>$dados['estadoCivil'],
+            'escolaridade'   =>$dados['escolaridade'],
+            'data_inicial'   =>$dataEntrada,
+            'data_final'   =>$dataSaida,
         ]);
+        // dd($identificacaoPessoa);
         $cont = 0;
         for ($i=0; $i < count($dados) ; $i++) {
         if (isset($dados["nomeMembro_".$i])) {
@@ -197,17 +196,17 @@ $mensagens = array(
             $bolsa_familia    = $dados["bolsaFamilia_".$i];
             $previdencia      = $dados["previdencia_".$i];
             $rendaUsuario    = $dados["rendaMensalUser_".$i];
-            $composicaoFamiliar = DB::table('family_composition')->insertGetId([
-            'id_Identification_person'      =>$identificacaoPessoa,
-            'name'                          =>$membroNome,
-            'kinship'                       =>$membroParentesco,
-            'idade'                         =>$membroIdade,
-            'sex'                           =>$membroSexo,
-            'nis'                           =>$membroNis,
-            'loas'                          =>$loas,
-            'bolsaFamilia'                  =>$bolsa_familia,
-            'previdencia'                   =>$previdencia,
-            'incomeUser'                    =>$rendaUsuario,
+            $composicaoFamiliar = DB::table('membro_familiar')->insertGetId([
+                'id_identificacao_usuario'      =>$identificacaoPessoa,
+                'nome'                          =>$membroNome,
+                'parentesco'                       =>$membroParentesco,
+                'idade'                         =>$membroIdade,
+                'sexo'                           =>$membroSexo,
+                'nis'                           =>$membroNis,
+                'loas'                          =>$loas,
+                'bolsaFamilia'                  =>$bolsa_familia,
+                'previdencia'                   =>$previdencia,
+                'renda'                         =>$rendaUsuario,
               ]);
             }
           }
@@ -230,52 +229,53 @@ $mensagens = array(
 public function show($id)
 {
        $identificacao = DB::select(
-        'SELECT *, Identification_person.id as id_Identification_person FROM Identification_person, address, situation_financial,vulnerabilities
-                         where  Identification_person.id_address = address.id  and
-                                Identification_person.id_situation_FInancial = situation_financial.id and
-                                Identification_person.id_Vulnerabilities = vulnerabilities.id and
-                                Identification_person.id='.$id );
-      $membros =  DB::select('SELECT family_composition.incomeUser,family_composition.nis,family_composition.loas,family_composition.bolsaFamilia,family_composition.previdencia,family_composition.name, family_composition.kinship, family_composition.idade,family_composition.sex
-                                             FROM Identification_person, family_composition
-                                             where family_composition.id_Identification_person = Identification_person.id
-                                                and Identification_person.id ='.$id);
+        'SELECT *, identificacao_usuario.id as identificacao_usuario FROM identificacao_usuario, endereco, situacao_financeira,vulnerabilidade
+                         where  identificacao_usuario.id_endereco = endereco.id  and
+                         identificacao_usuario.id_situacao_financeira = situacao_financeira.id and
+                         identificacao_usuario.id_vulnerabilidade = vulnerabilidade.id and
+                         identificacao_usuario.id='.$id );
+
+            $membros =  DB::select('SELECT membro_familiar.renda,membro_familiar.nis,membro_familiar.loas,
+                                           membro_familiar.bolsaFamilia,membro_familiar.previdencia,
+                                           membro_familiar.nome, membro_familiar.parentesco, membro_familiar.idade,membro_familiar.sexo
+                                    FROM identificacao_usuario, membro_familiar
+                                    where membro_familiar.id_identificacao_usuario = identificacao_usuario.id
+                                    and identificacao_usuario.id ='.$id);
+
         for ($i=0; $i < count($identificacao) ; $i++) {
 
-            if (!is_null($identificacao[$i]->date_initial)) {
-                $dataInicial = $identificacao[$i]->date_initial;
-                $dataP = explode('-', $identificacao[$i]->date_initial);
+            if (!is_null($identificacao[$i]->data_inicial)) {
+                $dataInicial = $identificacao[$i]->data_inicial;
+                $dataP = explode('-', $identificacao[$i]->data_inicial);
                 $dataInicial= $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-                $identificacao[$i]->date_initial = $dataInicial;
+                $identificacao[$i]->data_inicial = $dataInicial;
             }
-            if (!is_null($identificacao[$i]->date_end)) {
-                $dataFinal = $identificacao[$i]->date_end;
-                $dataP = explode('-', $identificacao[$i]->date_end);
+            if (!is_null($identificacao[$i]->data_final)) {
+                $dataFinal = $identificacao[$i]->data_final;
+                $dataP = explode('-', $identificacao[$i]->data_final);
                 $dataFinal = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-                $identificacao[$i]->date_end = $dataFinal;
-
-
-            }if (!is_null($identificacao[$i]->birth)) {
-                $dataAniversario = $identificacao[$i]->birth;
-                $dataP = explode('-', $identificacao[$i]->birth);
+                $identificacao[$i]->data_final = $dataFinal;
+            }if (!is_null($identificacao[$i]->data_nascimento)) {
+                $dataAniversario = $identificacao[$i]->data_nascimento;
+                $dataP = explode('-', $identificacao[$i]->data_nascimento);
                 $dataAniversario = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-                $identificacao[$i]->birth = $dataAniversario;
+                $identificacao[$i]->data_nascimento = $dataAniversario;
 
-            }if (!is_null($identificacao[$i]->rg_emission_date)) {
-                $RG = $identificacao[$i]->rg_emission_date;
-                $dataP = explode('-', $identificacao[$i]->rg_emission_date);
+            }if (!is_null($identificacao[$i]->data_emissao_rg)) {
+                $RG = $identificacao[$i]->data_emissao_rg;
+                $dataP = explode('-', $identificacao[$i]->data_emissao_rg);
                 $RG = $dataP[2].'/'.$dataP[1].'/'.$dataP[0];
-                $identificacao[$i]->rg_emission_date = $RG;
+                $identificacao[$i]->data_emissao_rg = $RG;
 
             }
         }
         $total = 0;
         foreach ($membros as $m) {            
-            $total = $total + $m->loas + $m->previdencia + $m->bolsaFamilia + $m->incomeUser;
-            // dd($total);
+            $total = $total + $m->loas + $m->previdencia + $m->bolsaFamilia + $m->renda;
         }
-        $soma = $identificacao[0]->bolsa_familia + $identificacao[0]->previdencia + $identificacao[0]->loasbpc + $identificacao[0]->income_family;  
+        $soma = $identificacao[0]->bolsa_familia + $identificacao[0]->previdencia + $identificacao[0]->loasbpc + $identificacao[0]->renda;  
         $total += $soma;
-        //dd($total);
+
    return view('vendor.adminlte.layouts.Portal.Family.visualizarCadastro', compact('identificacao','membros','total'));
 
 }
@@ -300,20 +300,27 @@ public function update(Request $request, $id)
 {
     DB::beginTransaction();
         $dados = $this->request->all();
-        $cpf = explode('.',$dados['cpf']);
-        $cpf = $cpf[0].''.$cpf[1].''.$cpf[2];
-        $cpf = explode('-',$cpf);
-        $cpf = $cpf[0].''.$cpf[1];
-        $dados['cpf'] = $cpf;
+            // dd($dados);
+        if (isset($dados['cpf'])) {
+            $cpf = explode('.',$dados['cpf']);
+            $cpf = $cpf[0].''.$cpf[1].''.$cpf[2];
+            $cpf = explode('-',$cpf);
+            $cpf = $cpf[0].''.$cpf[1];
+            $dados['cpf'] = $cpf;
+        }else{
+            $cpf = $dados['cpf'] = '00000000000';
+        }
 
-        if (is_null($dados["pontoReferencia"])) {
+        if(is_null($dados["pontoReferencia"])) {
          $dados['pontoReferencia'] = "";
         }    
-        if (is_null($dados['profissao'])) {
+        if(is_null($dados['profissao'])) {
         $dados['profissao']= '';
-        }if (is_null($dados['rendaFamiliar'])) {
-        $dados['rendaFamiliar'] = 0;
-        }if (is_null($dados['deficiencia'])) {
+        }
+        if(is_null($dados['rendaMensalUsuario'])) {
+        $dados['rendaMensalUsuario'] = 0;
+        }
+        if (is_null($dados['deficiencia'])) {
         $dados['deficiencia'] = "";
         }
         if (is_null($dados['data_saida'])) {
@@ -335,55 +342,63 @@ public function update(Request $request, $id)
         $dados['data_entrada'] = $dados['data_entrada'];
         $dataP = explode('/', $dados['data_entrada']);
         $dataEntrada = $dataP[2].'-'.$dataP[1].'-'.$dataP[0];
-        $consulta = DB::select('SELECT * FROM Identification_person WHERE  id='.$id);
-        $situacaoFinanceira = DB::table('situation_financial')->where('id', $consulta[0]->id_situation_FInancial)->update([
-            'profession'                        =>$dados['profissao'],
-            'income_family'                     =>$dados['rendaFamiliar'],
-            'family_reside'                     =>$dados['reside'],
-            'wallet_signed'                     =>$dados['carteiraAssinada'],            
-            'bolsa_familia'                     =>$dados['bolsaFamilia'],
-            'loasbpc'                           =>$dados['loas'],
-            'previdencia'                       =>$dados['previdencia'],
+        $consulta = DB::select('SELECT * FROM identificacao_usuario WHERE  id='.$id);
+        $situacaoFinanceira = DB::table('situacao_financeira')->where('id', $consulta[0]->id_situacao_financeira)->update([
+            'profissao'                             =>$dados['profissao'],
+            'renda'                                 =>$dados['rendaMensalUsuario'],
+            'reside_familia'                        =>$dados['reside'],
+            'carteira_assinada'                     =>$dados['carteiraAssinada'],
+            'bolsa_familia'                         =>$dados['bolsaFamilia'],
+            'loasbpc'                               =>$dados['loas'],
+            'previdencia'                           =>$dados['previdencia'],
         ]);
-
-        $vulnerabilidade = DB::table('vulnerabilities')->where('id', $consulta[0]->id_Vulnerabilities)->update([
-            'irregular_ocupation'               =>$dados['ocupacao_irregular'],
-            'children_alone'                    =>$dados['criancaSozinhaDomicilio'],
-            'dependent_elderly'                 =>$dados['idosos_dependentes'],
-            'unemployment'                      =>$dados['desemprego'],
-            'deficient_family'                  =>$dados['deficientes_na_familia'],
-            'lowIcome'                          =>$dados['baixaRenda'],
-            'others'                            =>$dados['outros'],
+        
+        $vulnerabilidade = DB::table('vulnerabilidade')->where('id', $consulta[0]->id_vulnerabilidade)->update([
+            'ocupacao_irregular'               =>$dados['ocupacao_irregular'],
+            'crianca_sozinha'                    =>$dados['criancaSozinhaDomicilio'],
+            'idosos_dependentes'                 =>$dados['idosos_dependentes'],
+            'desempregados'                      =>$dados['desemprego'],
+            'deficientes'                  =>$dados['deficientes_na_familia'],
+            'baixa_renda'                          =>$dados['baixaRenda'],
+            'outros'                            =>$dados['outros'],
             ]);
-        $endereco  = DB::table('address')->where('id', $consulta[0]->id_address)->update([
-            'phone'                            =>$dados['telefone'],
-            'address'                          =>$dados['address'],
-            'reference_point'                  =>$dados['pontoReferencia'],
-            'conditions_home'                  =>$dados['condicoesMoradia'],
-            'type_construct'                   =>$dados['tipoConstrucao'],
-            'rooms'                            =>$dados['qtdComodos'],
-            'value_home'                       =>$dados['valorAluguel'],
+            
+        $endereco  = DB::table('endereco')->where('id', $consulta[0]->id_endereco)->update([
+            'telefone'                            =>$dados['telefone'],
+            'endereco'                          =>$dados['address'],
+            'ponto_referencia'                  =>$dados['pontoReferencia'],
+            'condicoes_moradia'                  =>$dados['condicoesMoradia'],
+            'tipo_construcao'                   =>$dados['tipoConstrucao'],
+            'comodos'                            =>$dados['qtdComodos'],
+            'valor_aluguel'                       =>$dados['valorAluguel'],
         ]);
-        $identificacaoPessoa = DB::table('Identification_person')->where('id', $consulta[0]->id)->update([
-            'name'                              =>$dados['nome'],
-            'nick_name'                         =>$dados['apelido'],
-            'birth'                             =>$dataAniversario,
-            'NIS'                               =>$dados['nis'],
-            'rg_number'                         =>$dados['rgNumero'],
-            'rg_emission_date'                  =>$dataRg,
-            'rg_UF'                             =>$dados['RGuf'],
-            'rg_emission_organ'                 =>$dados['RgOrgaoEmissor'],
-            'cpf'                               =>$dados['cpf'],
-            'deficient'                         =>$dados['deficiente'],
-            'deficient_type'                    =>$dados['deficiencia'],
-            'mother'                            =>$dados['mae'],
-            'father'                            =>$dados['pai'],
-            'situation'                         =>$dados['estadoCivil'],
-            'schooling'                         =>$dados['escolaridade'],
-            'date_initial'                      =>$dataEntrada,
-            'date_end'                          =>$dataSaida,
+            
+
+        $identificacaoPessoa = DB::table('identificacao_usuario')->where('id', $consulta[0]->id)->update([
+                'nome'      => $dados['nome'],
+                'apelido' => $dados['apelido'],
+                'data_nascimento'     =>  $dataAniversario,
+                'NIS'             =>$dados['nis'],
+                'numero_rg'       =>$dados['rgNumero'],
+                'data_emissao_rg'=>$dataRg,
+                'certidao_nascimento' =>$dados['NumeroCadastro'],
+                'uf_rg'           =>$dados['RGuf'],
+                'emissao_rg'=>$dados['RgOrgaoEmissor'],
+                'cpf'           => $cpf,
+                'deficiente'     =>$dados['deficiente'],
+                'deficiencia'     =>$dados['deficiencia'],
+                'mae'        =>$dados['mae'],
+                'pai'        =>$dados['pai'],
+                'estado_civil'   =>$dados['estadoCivil'],
+                'escolaridade'   =>$dados['escolaridade'],
+                'data_inicial'   =>$dataEntrada,
+                'data_final'   =>$dataSaida,
         ]);    
-   $apagar =  DB::table('family_composition')->where('id_Identification_person',$consulta[0]->id)->delete();        
+        // dd($identificacaoPessoa);
+
+        //falta atualizar
+
+   $apagar =  DB::table('membro_familiar')->where('id_identificacao_usuario',$consulta[0]->id)->delete();        
          for ($i=0; $i < count($dados) ; $i++) {
            if (isset($dados["nomeMembro".$i])) {
             // dd($dados);
@@ -397,19 +412,20 @@ public function update(Request $request, $id)
              $previdencia      = $dados["previdencia".$i];
              $rendaUsuario    = $dados["rendaMensalUser".$i];
 
-            $composicaoFamiliar = DB::table('family_composition')->insertGetId([
-            'id_Identification_person'      =>$consulta[0]->id,
-            'name'                          =>$membroNome,
-            'kinship'                       =>$membroParentesco,
+            $composicaoFamiliar = DB::table('membro_familiar')->insertGetId([
+            'id_identificacao_usuario'      =>$consulta[0]->id,
+            'nome'                          =>$membroNome,
+            'parentesco'                       =>$membroParentesco,
             'idade'                         =>$membroIdade,
-            'sex'                           =>$membroSexo,
+            'sexo'                           =>$membroSexo,
             'nis'                           =>$membroNis,
             'loas'                          =>$loas,
             'bolsaFamilia'                  =>$bolsa_familia,
             'previdencia'                   =>$previdencia,
-            'incomeUser'                    =>$rendaUsuario,
+            'renda'                    =>$rendaUsuario,
               ]);
             }
+
             if (isset($dados["nomeMembro_".$i])) {
             $membroNome       = $dados["nomeMembro_".$i];
             $membroParentesco = $dados["parentesco_".$i];
@@ -421,17 +437,17 @@ public function update(Request $request, $id)
             $previdencia      = $dados["previdencia_".$i];
             $rendaUsuario    = $dados["rendaMensalUser_".$i];
 
-        $composicaoFamiliar = DB::table('family_composition')->insertGetId([
-            'id_Identification_person'      =>$consulta[0]->id,
-            'name'                          =>$membroNome,
-            'kinship'                       =>$membroParentesco,
+        $composicaoFamiliar = DB::table('membro_familiar')->insertGetId([
+            'id_identificacao_usuario'      =>$consulta[0]->id,
+            'nome'                          =>$membroNome,
+            'parentesco'                       =>$membroParentesco,
             'idade'                         =>$membroIdade,
-            'sex'                           =>$membroSexo,
+            'sexo'                           =>$membroSexo,
             'nis'                           =>$membroNis,
             'loas'                          =>$loas,
             'bolsaFamilia'                  =>$bolsa_familia,
             'previdencia'                   =>$previdencia,
-            'incomeUser'                    =>$rendaUsuario,
+            'renda'                    =>$rendaUsuario,
 
               ]);
             }
@@ -456,19 +472,19 @@ public function destroy($id)
 {
 
 }    
-    public function atendimentosDiario() {
-        $data = date('y-m-d');
+    // public function atendimentosDiario() {
+    //     $data = date('y-m-d');
 
-        $identificacao = DB::select(
-        'SELECT *, Identification_person.id as id_Identification_person FROM Identification_person,
-                                address, situation_financial,vulnerabilities, attendance_daily, attendance_daily
-                         where  Identification_person.id_address = address.id  and
-                                Identification_person.id_situation_FInancial = situation_financial.id and
-                                Identification_person.id_Vulnerabilities = vulnerabilities.id and
-                                Identification_person.id = attendance_daily.id_Identification_person or attendance_daily.id = '.$data.' and
-                               attendance_daily.data='.$data);        
-     return view('vendor.adminlte.home', compact('identificacao'));
+    //     $identificacao = DB::select(
+    //     'SELECT *, Identification_person.id as id_Identification_person FROM Identification_person,
+    //                             address, situation_financial,vulnerabilities, attendance_daily, attendance_daily
+    //                      where  Identification_person.id_address = address.id  and
+    //                             Identification_person.id_situation_FInancial = situation_financial.id and
+    //                             Identification_person.id_Vulnerabilities = vulnerabilities.id and
+    //                             Identification_person.id = attendance_daily.id_Identification_person or attendance_daily.id = '.$data.' and
+    //                            attendance_daily.data='.$data);        
+    //  return view('vendor.adminlte.home', compact('identificacao'));
 
-    }    
+    // }    
 }
 
