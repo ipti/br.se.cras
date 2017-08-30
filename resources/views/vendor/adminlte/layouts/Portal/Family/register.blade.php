@@ -52,7 +52,7 @@
               <span class="input-group-addon">Nome</span>
               <input  type="text" name="nome" class="form-control" placeholder="" id="name" title="Informe um nome válido." />
             </div>
-          </div>
+        </div>  
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Apelido</span>
@@ -86,7 +86,7 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" placeholder="" id="" title="Informe um nome válido." maxlength="8"  >
+              <input  type="text" name="rgNumero" class="form-control" data-mask="00.000.000-00" data-mask-selectonfocus="true" placeholder="00.000.000-00" id="" title="Informe um nome válido." maxlength="13"  >               
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
@@ -100,8 +100,8 @@
               <!-- <span class="input-group-addon">UF</span> -->
               <div class="input-group">
               <label class="input-group-addon">UF</label>
-              <select class="form-control" name="RGuf"     >
-                <option selected=""></option>
+              <select class="form-control" name="RGuf">
+                <option selected="">SE</option>
                 <option value="AC">AC</option>
                 <option value="AL">AL</option>
                 <option value="AP">AP</option>
@@ -518,6 +518,5 @@
         <br>
       </div>
     </form>
-  </div>
-  
+  </div>  
   @endsection

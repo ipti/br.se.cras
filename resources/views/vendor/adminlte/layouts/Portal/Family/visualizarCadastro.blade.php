@@ -798,10 +798,9 @@
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <label id="opcao4">
-                  <div class=input-group><span class=input-group-addon>LOAS/BPC</span>
+                  <div class="nput-group"><span class=input-group-addon>LOAS/BPC</span>
                   <input style=height:1%!important; type="number" class="form-control" name="loas" 
-                    value="{{$id->loasbpc}}" required="" 
-                  />
+                    value="{{$id->loasbpc}}" required=""/>
                   <span class=input-group-addon><span>R$</span></span></div>
                 </label> 
                 <label id="opcao4">

@@ -3,14 +3,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Terms and conditions</h3>
+            <h3 class="modal-title">Termos de condições</h3>                
             </div>
-
             <div class="modal-body">
-                <p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
-                <p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
+                <p>Você alega ter uma idade maior ou igual a 18 anos e está ciente de todas as responsabilidades estabelecidas no sistema CRAS de gerenciamento? caso esteja ciente basta aceitar o termo clicando na caixinha ao lado da pagina anterior e estebelecer um contrato com o CRAS, aproveitando assim seus serviços.</p>
+                <p>Do you claim to be 18 years of age or older and aware of all responsibilities set out in the CRAS management system? If you are aware just accept the term by clicking on the box next to the previous page and establish a contract with CRAS, thus taking advantage of their services.</p>
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
             </div>

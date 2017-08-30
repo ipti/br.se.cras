@@ -1,18 +1,14 @@
 @extends('adminlte::layouts.auth')
-
 @section('htmlheader_title')
     Register
 @endsection
-
 @section('content')
-
     <body class="hold-transition register-page">
     <div id="app" v-cloak>
         <div class="register-box">
             <div class="register-logo">
                 <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
             </div>
-
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
@@ -23,7 +19,6 @@
                     </ul>
                 </div>
             @endif
-
             <div class="register-box-body">
                 <p class="login-box-msg">{{ trans('adminlte_lang::message.registermember') }}</p>
                 <form action="{{ url('/register') }}" method="post">
@@ -38,7 +33,6 @@
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
                     @endif
-
                     <div class="form-group has-feedback">
                         <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email" value="{{ old('email') }}"/>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -71,18 +65,13 @@
                         </div><!-- /.col -->
                     </div>
                 </form>
-
                 @include('adminlte::auth.partials.social_login')
-
                 <a href="{{ url('/login') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
             </div><!-- /.form-box -->
         </div><!-- /.register-box -->
     </div>
-
     @include('adminlte::layouts.partials.scripts_auth')
-
     @include('adminlte::auth.terms')
-
     <script>
       $(function () {
         $('input').iCheck({
@@ -92,7 +81,21 @@
         });
       });
     </script>
-
     </body>
-
 @endsection
+<?php
+    
+    $mysqli = new mysqli('localhost', 'root', '', 'artigos');
+
+  $user = filter_input(INPUT_GET, 'email');
+  $sql = "SELECT * FROM `users` WHERE `email` = '{$user}'"; //monto a query
+
+  $query = $mysqli->query( $sql ); //executo a query
+
+  if( $query->num_rows > 0 ) {//se retornar algum resultado
+    echo 'Já existe!';
+  } else {
+    echo 'Não existe ainda!';
+  }
+
+?>

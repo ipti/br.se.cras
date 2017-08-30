@@ -40,12 +40,9 @@
             <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
 
         </div><!-- /.login-box-body -->
-
     </div><!-- /.login-box -->
     </div>
-
     @include('adminlte::layouts.partials.scripts_auth')
-
     <script>
         $(function () {
             $('input').iCheck({
@@ -56,5 +53,4 @@
         });
     </script>
     </body>
-
 @endsection

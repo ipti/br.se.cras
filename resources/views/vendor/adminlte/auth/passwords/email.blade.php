@@ -1,11 +1,13 @@
 @extends('adminlte::layouts.auth')
-
 @section('htmlheader_title')
     Password recovery
 @endsection
-
 @section('content')
-
+<style type="text/css">
+    .btn{
+        text-rendering: 
+    }
+</style>
 <body class="login-page">
     <div id="app">
 
@@ -19,7 +21,6 @@
                 {{ session('status') }}
             </div>
         @endif
-
         @if (count($errors) > 0)
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
@@ -30,22 +31,22 @@
                 </ul>
             </div>
         @endif
-
         <div class="login-box-body">
-            <p class="login-box-msg">Reset Password</p>
-
-            <email-reset-password-form></email-reset-password-form>
-
-            <a href="{{ url('/login') }}">Log in</a><br>
-            <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
-
+            <p class="login-box-msg">Reset Password</p>  
+            <email-reset-password-form></email-reset-password-form>                
+            <br>
+            <div class="row">
+                        <div class="col-sm-3 col-md-6">
+                            <a href="{{ url('/login') }}" type="button" class="btn btn-warning btn-block btn-flat" style="">Entrar</a>
+                        </div>
+                        <div class="col-sm-3 col-md-6">
+                            <a href="{{ url('/register') }}" type="button" class="btn btn-info btn-block btn-flat">Cadastre-se</a><br> 
+                        </div>
+                    </div>
         </div><!-- /.login-box-body -->
-
     </div><!-- /.login-box -->
     </div>
-
     @include('adminlte::layouts.partials.scripts_auth')
-
     <script>
         $(function () {
             $('input').iCheck({
@@ -56,5 +57,4 @@
         });
     </script>
 </body>
-
 @endsection

@@ -1,9 +1,7 @@
 @extends('adminlte::layouts.auth')
-
 @section('htmlheader_title')
     Log in
 @endsection
-
 @section('content')
     <body class="hold-transition login-page">
     <div id="app" v-cloak>
@@ -11,7 +9,6 @@
             <div class="login-logo">
                 <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
             </div><!-- /.login-logo -->
-
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
@@ -22,7 +19,6 @@
                     </ul>
                 </div>
             @endif
-
             <div class="login-box-body">
                 <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
                 <form action="{{ url('/login') }}" method="post">
@@ -52,18 +48,13 @@
                         </div><!-- /.col -->
                     </div>
                 </form>
-
                 @include('adminlte::auth.partials.social_login')
-
                 <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
                 <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
-
             </div><!-- /.login-box-body -->
-
         </div><!-- /.login-box -->
     </div>
     @include('adminlte::layouts.partials.scripts_auth')
-
     <script>
       $(function () {
         $('input').iCheck({
@@ -74,5 +65,4 @@
       });
     </script>
     </body>
-
 @endsection
