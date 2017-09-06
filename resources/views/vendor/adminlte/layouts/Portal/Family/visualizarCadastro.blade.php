@@ -1,6 +1,5 @@
 @extends('adminlte::layouts.app')
-@section('main-content')
-
+@section('main-content')      
       @foreach($identificacao as $id)
       
   <div class="Cadastrar">
@@ -65,13 +64,13 @@
            <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Nome</span>
-              <input  type="text" name="nome" class="form-control" value="{{$id->nome}}" >
+              <input  type="text" name="nome" style="text-transform: uppercase;" class="form-control" value="{{$id->nome}}" onkeypress="return lettersOnly(event);" >
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Apelido</span>
-              <input  type="text" name="apelido" class="form-control" value="{{$id->apelido}}" >
+              <input  type="text" name="apelido" class="form-control" value="{{$id->apelido}}" onkeypress="return lettersOnly(event);" style="text-transform: uppercase;">
             </div>
           </div>
         </div>
@@ -91,7 +90,7 @@
           <div class="col-md-4 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">NIS</span>
-              <input  type="text" name="nis"      class="form-control" value="{{$id->NIS}}" >
+              <input  type="number" name="nis" onkeyups ="somenteNumeros(this)" class="form-control" value="{{$id->NIS}}" >
             </div>
           </div>
         </div>
@@ -99,7 +98,8 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" value="{{$id->numero_rg}}" >
+              <input  type="text" name="rgNumero" class="form-control" value="{{$id->numero_rg}}"
+              data-mask="00.000.000-0" data-mask-selectonfocus="true" placeholder="00.000.000-0" id="" title="Informe um nome válido." maxlength="13" >               
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
@@ -147,8 +147,8 @@
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
-              <span class="input-group-addon">Órgão Emissor</span>
-              <input  type="text" name="RgOrgaoEmissor" class="form-control" value="{{$id->emissao_rg}}" >
+              <span class="input-group-addon">Orgão Emissor</span>
+              <input  type="text" name="RgOrgaoEmissor" class="form-control" onkeypress="return lettersOnly(event);" value="{{$id->emissao_rg}}" style="text-transform: uppercase;">
             </div>
           </div>
         </div>
@@ -191,7 +191,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Mãe</span>
-              <input  type="text" name="mae" class="form-control" value="{{$id->mae}}"  >
+              <input  type="text" name="mae" class="form-control" value="{{$id->mae}}"  onkeypress="return lettersOnly(event);" style="text-transform: uppercase;">
             </div>
           </div>
         </div>
@@ -199,7 +199,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Pai <br></span>
-              <input  type="text" name="pai"  class="form-control" value="{{$id->pai}}"  >
+              <input  type="text" name="pai"  class="form-control" value="{{$id->pai}}"  onkeypress="return lettersOnly(event);" style="text-transform: uppercase;">
             </div>
           </div>
         </div>
@@ -723,7 +723,7 @@
             <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="input-group" id="">
                 <span class="input-group-addon">Renda Mensal do usuário </span>
-                <input  type="number" name="rendaMensalUsuario"  value="{{$id->renda}}" required=""  >
+                <input  type="number" name="rendaMensalUsuario"  value="{{$id->renda}}"  >
               </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -901,8 +901,17 @@
          echo "".$linha8;
          echo "".$linha17;                         
          $loop++;         
-         }   
-     ?>              
+         }             
+        $id->nome = strtoupper($id->nome);
+        $id->apelido = strtoupper($id->apelido);
+        $id->pai = strtoupper($id->pai);
+        $id->mae = strtoupper($id->mae);
+        $id->emissao_rg = strtoupper($id->emissao_rg);
+        echo $id->nome;
+            
+
+
+     ?>               
               </tbody>
               <tfoot>
               <tr>
@@ -919,6 +928,9 @@
       </div>
     </form>
   </div>  
+  <script>
+    
+ </script>
   @endforeach
   
   @endsection

@@ -2,6 +2,8 @@
 
 <!-- JQuery and bootstrap are required by Laravel 5.3 in resources/assets/js/bootstrap.js-->
 <!-- Laravel App -->
+  <script src="{{url('//ajax.googleapis.com/ajax/libs/jquery/1/jquery.js')}}"></script>
+<script src="{{url('https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js')}}"></script>  
 
 
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
@@ -10,7 +12,6 @@
 <script src="{{ url('/js/pagesCadastro.js') }}" type="text/javascript"></script>
 
 <script src="{{ asset('/js/jquery.mask.min.js') }}" type="text/javascript"></script>
-
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the
@@ -23,6 +24,7 @@
 <script src="{{asset('/plugins/jquery.inputmask.js') }}"></script>
 <script src="{{asset('/plugins/jquery.inputmask.date.extensions.js') }}"></script>
 
+<script src="{{ url('/js/notify.js') }}"></script>
 
 
 <!-- <script type="text/javascript">
@@ -143,6 +145,38 @@ function verificaNumero(e) {
                 $("#nis").keypress(verificaNumero);
                 // $("#txtCEP3").keypress(verificaNumero);
             });
+
+
+            //USADO NA VIEW VISUALIZAR
+            //NÃO PERMITE NUMEROS EM ALGUNS CAMPOS COMO O DE NOME            
+            function somenteNumeros(num) {
+        var er = /[^0-9.]/;
+        er.lastIndex = 0;
+        var campo = num;
+        if (er.test(campo.value)) {
+          campo.value = "";
+        }
+    }
+    $("#apenasLetras").on("input", function(){
+  var regexp = /[^a-zA-Z]/g;
+  if(this.value.match(regexp)){
+    $(this).val(this.value.replace(regexp,''));
+  }
+});
+    function lettersOnly(evt) {
+    evt = (evt) ? evt : event;
+    var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :
+        ((evt.which) ? evt.which : 0));
+    if (charCode > 31 && (charCode < 65 || charCode > 90) &&
+        (charCode < 97 || charCode > 122)) {
+      $.notify("Caracteres numéricos não são aceitos", "error");
+        return false;
+    }
+    return true;
+}
+function alerta(){
+  $.notify("Caracteres numéricos não são aceitos", "info");
+}
 
 </script>
 

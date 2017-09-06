@@ -23,14 +23,15 @@
         <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
         <login-form name="{{ config('auth.providers.users.field','email') }}"
                     domain="{{ config('auth.defaults.domain','') }}"></login-form>
-                    <div class="row">
+                    <!--DIV COM OS BOTÕES CADASTRE-SE E ESQUECI A SENHA-->
+                    <!--<div class="row">
                         <div class="col-sm-3 col-md-6">
                             <a href="/register" type="button" class="btn btn-primary btn-block btn-flat" style="">cadastre-se</a>
                         </div>
                         <div class="col-sm-3 col-md-6">
                             <a href="{{ url('/password/reset') }}" type="button" class="btn btn-danger btn-block btn-flat">Esqueci a senha</a><br> 
                         </div>
-                    </div>                                        
+                    </div>-->                                        
         {{-- <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a> --}}
     </div>
     </div>

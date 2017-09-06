@@ -84,18 +84,16 @@
     </body>
 @endsection
 <?php
-    
-    $mysqli = new mysqli('localhost', 'root', '', 'artigos');
+  //   $mysqli = new mysqli('localhost', 'root', '', 'artigos');
 
-  $user = filter_input(INPUT_GET, 'email');
-  $sql = "SELECT * FROM `users` WHERE `email` = '{$user}'"; //monto a query
+  //   $user = filter_input(INPUT_GET, 'email');
+  //   $sql = "SELECT * FROM `users` WHERE `email` = '{$user}'"; //monto a query
 
-  $query = $mysqli->query( $sql ); //executo a query
+  //   $query = $mysqli->query( $sql ); //executo a query
 
-  if( $query->num_rows > 0 ) {//se retornar algum resultado
-    echo 'Já existe!';
-  } else {
-    echo 'Não existe ainda!';
-  }
-
+  //   if( $query->num_rows > 0 ) {//se retornar algum resultado
+  //   echo 'Já existe!';
+  //   } else {
+  //   echo 'Não existe ainda!';
+  // }
 ?>

@@ -41,16 +41,14 @@
                 <span class="input-group-addon">Data Desligamento</span>
                 <input type="text" class="form-control"   name="data_saida"  placeholder='____/____/_______' id="data_saida" >
               </div>
-              </div>
-          
+              </div>          
           <br><br>
-
           <h4> I - Nome</h4>
           <br>
            <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Nome</span>
-              <input  type="text" name="nome" class="form-control" placeholder="" id="name" title="Informe um nome válido." />
+              <input  type="text" name="nome" style="text-transform:uppercase" class="form-control" placeholder="" id="name" title="Informe um nome válido." />
             </div>
         </div>  
           <div class="col-md-6 col-sm-6 col-xs-12">
@@ -86,7 +84,7 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" data-mask="00.000.000-00" data-mask-selectonfocus="true" placeholder="00.000.000-00" id="" title="Informe um nome válido." maxlength="13"  >               
+              <input  type="text" name="rgNumero" class="form-control" data-mask="00.000.000-0" data-mask-selectonfocus="true" placeholder="00.000.000-0" id="" title="Informe um nome válido." maxlength="12">               
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
@@ -168,7 +166,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Mãe</span>
-              <input  type="text" name="mae" class="form-control" placeholder="" id="mae"  title="Informe um nome válido." >
+              <input  type="text" name="mae" style="text-transform:uppercase" class="form-control" placeholder="" id="mae"  title="Informe um nome válido." >
             </div>
           </div>
         </div>
@@ -176,7 +174,7 @@
           <div class="col-md-12 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Pai <br></span>
-              <input  type="text" name="pai"  class="form-control" placeholder="" id="pai" title="Informe um nome válido." >
+              <input  type="text" name="pai" style="text-transform:uppercase" class="form-control" placeholder="" id="pai" title="Informe um nome válido." >
             </div>
           </div>
         </div>
@@ -283,8 +281,7 @@
                 <label  id="opcao1">
                   <input type="radio" name="condicoesMoradia"      id="" value="areaDeOcupacao" >
                   Área de Ocupação
-                </label>
-                
+                </label>                
               </div>
             </div>
           </div>
@@ -377,8 +374,7 @@
                 </label>
               </div>
             </div>
-          </div>
-          
+          </div>          
           <br>
           <hr>
           <div id="box1">
@@ -485,7 +481,6 @@
                   <th  style="text-align: center;">Ações</th>
                 </tr>
                 <tr>
-
                   <!-- <td><input type="text" name="nomeMembro" ></td>
                   <td><input type="text" name="parentesco" ></td>
                   <td><input type="number" name="idade" ></td>
@@ -502,9 +497,7 @@
               </tbody>
               <tfoot>
               <tr>
-                <td colspan="5" style="text-align: center;">
-                  
-                  
+                <td colspan="5" style="text-align: center;">                                
                 </td>
               </tr>
               </tfoot>

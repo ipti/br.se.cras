@@ -191,11 +191,12 @@ public function store(Request $request)
             'escolaridade'   =>$dados['escolaridade'],
             'data_inicial'   =>$dataEntrada,
             'data_final'   =>$dataSaida,
-        ]);
+        ]);        
         // dd($identificacaoPessoa);
         $cont = 0;
         for ($i=0; $i < count($dados) ; $i++) {
         if (isset($dados["nomeMembro_".$i])) {
+            $membrosNomeAtual = $dados["nomeMembro_".$i]; 
             $membroNome       = $dados["nomeMembro_".$i];
             $membroParentesco = $dados["parentesco_".$i];
             $membroIdade      = $dados["idade_".$i];
@@ -217,8 +218,13 @@ public function store(Request $request)
                 'previdencia'                   =>$previdencia,
                 'renda'                         =>$rendaUsuario,
               ]);
-            }
-          }
+            }            
+          }          
+        //   $cont = 0;
+        // for ($i=0; $i < count($dados) ; $i++) {
+        // if () {                            
+        //     }            
+        //   }        
     if ($situacaoFinanceira != null && $vulnerabilidade !=null &&   $endereco != null
             &&  $identificacaoPessoa != null ) {
         alert()->success('', 'Cadastro realizado com sucesso!')->autoclose(3000);
@@ -294,10 +300,6 @@ public function show($id)
 * @param  int  $id
 * @return \Illuminate\Http\Response
 */
-public function edit($id)
-{
-
-}
 /**
 * Update the specified resource in storage.
 *
@@ -411,9 +413,6 @@ public function update(Request $request, $id)
                 'data_inicial'   =>$dataEntrada,
                 'data_final'   =>$dataSaida,
         ]);    
-        // dd($identificacaoPessoa);
-
-        //falta atualizar
 
    $apagar =  DB::table('membro_familiar')->where('id_identificacao_usuario',$consulta[0]->id)->delete();        
          for ($i=0; $i < count($dados) ; $i++) {
@@ -440,7 +439,7 @@ public function update(Request $request, $id)
             'bolsaFamilia'                  =>$bolsa_familia,
             'previdencia'                   =>$previdencia,
             'renda'                    =>$rendaUsuario,
-              ]);
+              ]);    
             }
 
             if (isset($dados["nomeMembro_".$i])) {
