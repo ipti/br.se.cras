@@ -81,14 +81,8 @@ public function store(Request $request)
     }else{
         $cpf = $dados['cpf'] = '00000000000';
     }
-    if (isset($dados['rgNumero'])) {
-        $rgNumero = explode('.',$dados['rgNumero']);
-        $rgNumero = $rgNumero[0].''.$rgNumero[1].''.$rgNumero[2];
-        $rgNumero = explode('-',$rgNumero);
-        $rgNumero = $rgNumero[0].''.$rgNumero[1];
-        $dados['rgNumero'] = $cpf;
-    }else{
-        $rgNumero = $dados['rgNumero'] = '00000000000';
+    if (!isset($dados['rgNumero'])) {
+        $rgNumero = $dados['rgNumero'] = '00000000000'; 
     }
     //  $validator = Validator::make( $request->all(), [
     //         'data_entrada'          =>'required',
@@ -321,14 +315,8 @@ public function update(Request $request, $id)
         }else{
             $cpf = $dados['cpf'] = '00000000000';
         }
-        if (isset($dados['rgNumero'])) {
-        $rgNumero = explode('.',$dados['rgNumero']);
-        $rgNumero = $rgNumero[0].''.$rgNumero[1].''.$rgNumero[2];
-        $rgNumero = explode('-',$rgNumero);
-        $rgNumero = $rgNumero[0].''.$rgNumero[1];
-        $dados['rgNumero'] = $cpf;
-    }else{
-        $rgNumero = $dados['rgNumero'] = '00000000000';
+        if (!isset($dados['rgNumero'])) {
+            $rgNumero = $dados['rgNumero'] = '00000000000';
     }
         if(is_null($dados["pontoReferencia"])) {
          $dados['pontoReferencia'] = "";

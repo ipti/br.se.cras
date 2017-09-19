@@ -84,7 +84,7 @@
           <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="input-group" id="">
               <span class="input-group-addon">RG</span>
-              <input  type="text" name="rgNumero" class="form-control" data-mask="00.000.000-0" data-mask-selectonfocus="true" placeholder="00.000.000-0" id="" title="Informe um nome válido." maxlength="12">               
+              <input  type="text" name="rgNumero" class="form-control" id="" title="Informe um nome válido." maxlength="12">               
             </div>
           </div>
           <div class="col-md-3 col-sm-6 col-xs-12">
