@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function () {
      
      Route::get(' /attendance/edit/{id}/{idAtendimento}',                       'atendimentoController@edit');
      Route::post(' /attendance/edit/{id}/{idAtendimento}',                       'atendimentoController@update');
+
+     Route::resource('user', 'UserController');
      
      
      

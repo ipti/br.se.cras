@@ -48,6 +48,12 @@
             </li> -->
 
             <li><a href="{{url('/family')}}"><i class='fa fa-group'></i> <span>{{trans('message.family_referenced')}}</span></a></li>
+
+            <li>
+                <a href="{{url('/user')}}">
+                    <i class='fa fa-user'></i> <span>{{trans('message.users')}}</span>
+                </a>
+            </li>
             
                 
         </ul><!-- /.sidebar-menu -->

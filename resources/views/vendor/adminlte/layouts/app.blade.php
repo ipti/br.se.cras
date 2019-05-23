@@ -44,6 +44,7 @@ desired effect
 </div>
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')
+    @yield('page-script')
 @show
 </body>
 </html>

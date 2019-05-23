@@ -128,5 +128,5 @@ return [
     'ipti'                    => 'IPTI', 
     'family_referenced'       => 'Famílias Referenciadas',
     'attendance'              => 'Atendimentos',
-    
+    'users'                   => 'Usuários',
 ];
