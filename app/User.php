@@ -26,4 +26,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $appends = ['tipo_usuario'];
+
+    public function getTipoUsuarioAttribute()
+    {
+        switch ($this->user_type) {
+            case 'T':
+                return 'Técnico';
+            case 'C':
+                return 'Coordenador(a)';
+            case 'A':
+                return 'Assistente Social';
+            case 'P':
+                return 'Psicólogo(a)';
+            case 'S':
+                return 'Secretário(a)';
+            default:
+                return '';
+        }
+    }
 }

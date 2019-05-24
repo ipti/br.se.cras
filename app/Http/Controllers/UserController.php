@@ -40,7 +40,8 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email', 'max:255'],
-            'password' => ['required', 'string', 'min:8', 'max:255', 'confirmed']
+            'user_type' => ['required', 'in:T,C,A,P,S'],
+            'password' => ['required', 'string', 'min:6', 'max:255', 'confirmed']
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +54,7 @@ class UserController extends Controller
         $user = new User;
         $user->name = $request->input('name');
         $user->email = $request->input('email');
+        $user->user_type = $request->input('user_type');
         $user->password = bcrypt($request->input('password'));
         $user->save();
 
@@ -91,7 +93,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email', 'max:255'],
+            'user_type' => ['required', 'in:T,C,A,P,S'],
+            'password' => ['string', 'min:6', 'max:255', 'confirmed']
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->route('user.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = User::find($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->user_type = $request->input('user_type');
+        if (trim($request->input('password')) !== '') {
+            $user->password = bcrypt($request->input('password'));
+        }
+        $user->save();
+
+        alert()->success('Usuário atualizado com sucesso', 'Sucesso');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -102,6 +128,15 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+
+        if ($user !== null) {
+            $user->delete();
+            alert()->success('Usuário apagado com sucesso', 'Sucesso');
+            return redirect()->route('user.index');
+        }
+
+        error()->warning('Usuário não encontrado', 'Atenção');
+        return redirect()->route('user.index');
     }
 }
