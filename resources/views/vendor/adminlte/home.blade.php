@@ -6,40 +6,77 @@
 
 
 @section('main-content')
-	 <div class="row">
-   <a href="{{url('/attendance')}}" class="small-box-footer">
-        <div class="col-lg-6 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>{{$totalAtendimento}}</h3>
-              <p>Total de Atendimentos </p>
+    <div class="row">
+        <a href="{{url('/attendance')}}" class="small-box-footer">
+            <div class="col-lg-6 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>{{$totalAtendimento}}</h3>
+                        <p>Total de Atendimentos </p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <!-- Mais Informações <i class="fa fa-arrow-circle-right"></i> -->
+                </div>
             </div>
-              <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <!-- Mais Informações <i class="fa fa-arrow-circle-right"></i> -->
-          </div>
-        </div>
         </a>
         <!-- ./col -->
-         <a href="{{url('/family')}}" class="small-box-footer">
-        <div class="col-lg-6 col-xs-6">
-        
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>{{$totalFamilias}}<sup style="font-size: 20px"></sup></h3>
-              <p>Total de Famílias Referenciadas</p>
+        <a href="{{url('/family')}}" class="small-box-footer">
+            <div class="col-lg-6 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{$totalFamilias}}<sup style="font-size: 20px"></sup></h3>
+                        <p>Total de Famílias Referenciadas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa fa-users"></i>
+                    </div>
+                </div>
             </div>
-            <div class="icon">
-              <i class="fa fa fa-users"></i>
-            </div>
-          </div>
-        </div>
         </a>
         <!-- ./col -->
-       <!--  -->
+        <!--  -->
+      </div>
+      <div class="row">
+            <div class="col-lg-4 col-xs-4">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ $totalFamiliasInclusaoCadastroUnico }}<sup style="font-size: 20px"></sup></h3>
+                        <span>Total de Famílias encaminhadas para inclusão no cadastro único</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ $totalFamiliasAtualizacaoCadastral }}<sup style="font-size: 20px"></sup></h3>
+                        <span>Total de Famílias encaminhadas para atualização cadastral</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-4">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{ $totalFamiliasAcessoBpc }}<sup style="font-size: 20px"></sup></h3>
+                        <span>Total de Famílias encaminhadas para para acesso ao BPC</span>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
       </div>
     
     <div class="listaDeAvisos">

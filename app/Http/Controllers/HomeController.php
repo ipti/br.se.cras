@@ -51,12 +51,22 @@ class HomeController extends Controller
           ->select('*')->where('atendimentos.data', $dataInicio)->get();
           
 
-            $totalAtendimento = DB::table('atendimentos')->select('total')->count();
+        $totalAtendimento = DB::table('atendimentos')->select('total')->count();
 
-            $totalFamilias = DB::table('identificacao_usuario')->select('totalFamilias')->count();
-            // dd($totalAtendimento);
+        $totalFamilias = DB::table('identificacao_usuario')->select('totalFamilias')->count();
+
+        $totalFamiliasInclusaoCadastroUnico = DB::table('atendimentos')->where('encaminhamento', 'Inclusão Cadastro Único')->count();
+        $totalFamiliasAtualizacaoCadastral = DB::table('atendimentos')->where('encaminhamento', 'Atualização Cadastral')->count();
+        $totalFamiliasAcessoBpc = DB::table('atendimentos')->where('encaminhamento', 'BPC')->count();
             
-     return view('adminlte::home', compact('identificacao', 'totalAtendimento', 'totalFamilias', 'membro'));
-        // return view('adminlte::home', compact('identificacao'));
+        return view('adminlte::home', compact(
+            'identificacao',
+            'totalAtendimento',
+            'totalFamilias',
+            'totalFamiliasInclusaoCadastroUnico',
+            'totalFamiliasAtualizacaoCadastral',
+            'totalFamiliasAcessoBpc',
+            'membro'
+        ));
     }
 }
