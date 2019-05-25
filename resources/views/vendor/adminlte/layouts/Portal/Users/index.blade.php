@@ -52,7 +52,7 @@
                                 <form method="POST" action={{ route('user.destroy', [$user->id]) }}>
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <button type="submit" class="form-control">
+                                    <button type="submit" class="form-control btn-remove-user">
                                         <i class="fa fa-times"></i>
                                     </button>
                                 </form>
@@ -67,13 +67,19 @@
 
 @section('page-script')
     <script type="text/javascript">
-        $('#table-users').dataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true
+        $(document).ready(function () {
+            $('#table-users').on('draw.dt', function () {
+                $('.btn-remove-user').click(function () {
+                    return window.confirm('Deseja realmente remover este usuário?');
+                });
+            }).dataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
         });
     </script>
 @endsection

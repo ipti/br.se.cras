@@ -81,7 +81,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('vendor.adminlte.layouts.Portal.Users.edit', compact('user'));
     }
 
     /**
@@ -95,14 +97,14 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email', 'max:255'],
+            'email' => ['required', 'email', 'unique:users,email,'.$id, 'max:255'],
             'user_type' => ['required', 'in:T,C,A,P,S'],
-            'password' => ['string', 'min:6', 'max:255', 'confirmed']
+            'password' => [ 'nullable', 'string', 'min:6', 'max:255', 'confirmed']
         ]);
 
         if ($validator->fails()) {
             return redirect()
-                ->route('user.create')
+                ->route('user.edit', [$id])
                 ->withErrors($validator)
                 ->withInput();
         }
