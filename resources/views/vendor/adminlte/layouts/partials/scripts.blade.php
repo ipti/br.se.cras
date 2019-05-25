@@ -34,7 +34,7 @@
 <script>
   $(function () {
  
-    $('#example2').DataTable({
+    var tableAtendimentos = $('#example2').DataTable({
       "paging": true,
         "order":[[2,"desc"]],
       "lengthChange": true,
@@ -42,6 +42,10 @@
       "ordering": true,
       "info": true,
       "autoWidth": true,
+    });
+
+    $('.filtro-encaminhamento').change(function () {
+        tableAtendimentos.columns(6).search(this.value).draw();
     });
   });
 </script>

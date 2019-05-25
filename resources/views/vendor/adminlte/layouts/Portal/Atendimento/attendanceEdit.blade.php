@@ -54,7 +54,16 @@
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Providências</span>
-              <input  type="text" name="providencia"      class="form-control" value="{{$id->encaminhamento}}" title="Informe um nome válido." >
+              <select name="providencia" class="form-control" title="Informe um nome válido.">
+                  <option value="">Selecione</option>
+                  <option value="Inclusão Cadastro Único" {{ $id->encaminhamento === 'Inclusão Cadastro Único' }}>Inclusão Cadastro Único</option>
+                  <option value="Atualização Cadastral" {{ $id->encaminhamento === 'Atualização Cadastral' }}>Atualização Cadastral</option>
+                  <option value="Consulta" {{ $id->encaminhamento === 'Consulta' }}>Consulta</option>
+                  <option value="BPC" {{ $id->encaminhamento === 'BPC' }}>BPC</option>
+                  <option value="Bolsa Família" {{ $id->encaminhamento === 'Bolsa Família' }}>Bolsa Família</option>
+                  <option value="Tarifa Social" {{ $id->encaminhamento === 'Tarifa Social' }}>Tarifa Social</option>
+                  <option value="Acolhimento" {{ $id->encaminhamento === 'Acolhimento' }}>Acolhimento</option>
+              </select>
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">

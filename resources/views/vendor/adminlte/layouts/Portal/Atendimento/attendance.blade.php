@@ -23,7 +23,20 @@
 </div>
             <hr>
         </div>
-
+        <div class="row form-group">
+            <div class="col-md-4">
+                <select class="form-control filtro-encaminhamento">
+                    <option value="">Encaminhamento</option>
+                    <option value="Inclusão Cadastro Único">Inclusão Cadastro Único</option>
+                    <option value="Atualização Cadastral">Atualização Cadastral</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="BPC">BPC</option>
+                    <option value="Bolsa Família">Bolsa Família</option>
+                    <option value="Tarifa Social">Tarifa Social</option>
+                    <option value="Acolhimento">Acolhimento</option>
+                </select>
+            </div>
+        </div>
         <table id="example2" class="table table-striped">
             <thead>
             <tr>

@@ -55,7 +55,16 @@
           <div class="col-md-6 col-sm-6 col-xs-12">
             <div class="input-group " id="" >
               <span class="input-group-addon">Providências</span>
-              <input  type="text" name="providencia"      class="form-control" placeholder="" id=""  title="Informe um nome válido." >
+              <select name="providencia" class="form-control" title="Informe um nome válido.">
+                  <option value="">Selecione</option>
+                  <option value="Inclusão Cadastro Único">Inclusão Cadastro Único</option>
+                  <option value="Atualização Cadastral">Atualização Cadastral</option>
+                  <option value="Consulta">Consulta</option>
+                  <option value="BPC">BPC</option>
+                  <option value="Bolsa Família">Bolsa Família</option>
+                  <option value="Tarifa Social">Tarifa Social</option>
+                  <option value="Acolhimento">Acolhimento</option>
+              </select>
             </div>
           </div>
           <div class="col-md-6 col-sm-6 col-xs-12">
