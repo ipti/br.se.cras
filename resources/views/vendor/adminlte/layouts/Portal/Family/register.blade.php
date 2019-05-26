@@ -29,19 +29,39 @@
       <!-- <div class="formularioCadastro"> -->
       <div id="textaba1" class="divsel">
             <p></p>
-            <div  class="row" id="box1">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group" id="">
-                  <span class="input-group-addon">Data Entrada</span>
-              <input type="text" class="form-control"   name="data_entrada" id="data_entrada" placeholder='____/____/______' >
+            <div id="box1" class="row">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon">Pasta</span>
+                        <input type="text" class="form-control" name="pasta" maxlength="10">
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-              <div class="input-group" id="">
-                <span class="input-group-addon">Data Desligamento</span>
-                <input type="text" class="form-control"   name="data_saida"  placeholder='____/____/_______' id="data_saida" >
-              </div>
-              </div>          
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon">Arquivo</span>
+                        <input type="text" class="form-control" name="arquivo" maxlength="10">
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="input-group">
+                        <span class="input-group-addon">Nº:</span>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+            <div  class="row" id="box1">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group" id="">
+                        <span class="input-group-addon">Data Entrada</span>
+                        <input type="text" class="form-control"   name="data_entrada" id="data_entrada" placeholder='____/____/______' >
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="input-group" id="">
+                        <span class="input-group-addon">Data Desligamento</span>
+                        <input type="text" class="form-control"   name="data_saida"  placeholder='____/____/_______' id="data_saida" >
+                    </div>
+                </div>
           <br><br>
           <h4> I - Nome</h4>
           <br>

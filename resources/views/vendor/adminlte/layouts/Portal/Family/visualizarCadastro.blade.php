@@ -34,12 +34,24 @@
       <div id="textaba1" class="divsel">
 
       <div class="row" id="box1">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="input-group" id="">
-                  <span class="input-group-addon">Nº: </span>
-                  <input type="text" name="id" value="{{$id->id}}" disabled >
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Pasta</span>
+                    <input type="text" class="form-control" name="pasta" value="{{$id->pasta}}" maxlength="10">
                 </div>
-              </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon">Arquivo</span>
+                    <input type="text" class="form-control" name="arquivo" value="{{$id->arquivo}}" maxlength="10">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="input-group" id="">
+                    <span class="input-group-addon">Nº: </span>
+                    <input type="text" class="form-control" name="id" value="{{$id->id}}" disabled>
+                </div>
+            </div>
       </div>
 
             <div  class="row" id="box1">

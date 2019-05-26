@@ -185,6 +185,8 @@ public function store(Request $request)
             'escolaridade'   =>$dados['escolaridade'],
             'data_inicial'   =>$dataEntrada,
             'data_final'   =>$dataSaida,
+            'pasta' => $dados['pasta'],
+            'arquivo' => $dados['arquivo']
         ]);        
         // dd($identificacaoPessoa);
         $cont = 0;
@@ -400,6 +402,8 @@ public function update(Request $request, $id)
                 'escolaridade'   =>$dados['escolaridade'],
                 'data_inicial'   =>$dataEntrada,
                 'data_final'   =>$dataSaida,
+                'pasta' => $dados['pasta'],
+                'arquivo' => $dados['arquivo']
         ]);    
 
    $apagar =  DB::table('membro_familiar')->where('id_identificacao_usuario',$consulta[0]->id)->delete();        
