@@ -271,4 +271,44 @@ class atendimentoController extends Controller
     {
         //
     }
+
+    public function report(Request $request)
+    {
+        $data_inicial = date('d/m/Y', time());
+        $data_final = date('d/m/Y', time());
+        $patternDate = "/^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/";
+
+        if ($request->has('data_inicial') && boolval(preg_match($patternDate, $request->data_inicial))) {
+            list($dia, $mes, $ano) = explode('/', $request->data_inicial);
+            if (checkdate($mes, $dia, $ano)) {
+                $data_inicial = $request->data_inicial;
+            }
+        }
+
+        if ($request->has('data_final') && boolval(preg_match($patternDate, $request->data_final))) {
+            list($dia, $mes, $ano) = explode('/', $request->data_final);
+            if (checkdate($mes, $dia, $ano)) {
+                $data_final = $request->data_final;
+            }
+        }
+
+        list($diaDtIn, $mesDtIn, $anoDtIn) = explode('/', $data_inicial);
+        list($diaDtFn, $mesDtFn, $anoDtFn) = explode('/', $data_final);
+
+        $atendimentos = [];
+        if ($request->has('data_inicial') && $request->has('data_final')) {
+            $atendimentos = DB::table('atendimentos')
+                ->select(DB::raw('COUNT(encaminhamento) AS total, encaminhamento'))
+                ->where('data', '>=', "$anoDtIn-$mesDtIn-$diaDtIn")
+                ->where('data', '<=', "$anoDtFn-$mesDtFn-$diaDtFn")
+                ->groupBy('encaminhamento')
+                ->get();
+        }
+
+        return view('vendor.adminlte.layouts.Portal.Atendimento.report')->with([
+            'atendimentos' => $atendimentos,
+            'data_inicial' => $data_inicial,
+            'data_final' => $data_final
+        ]);
+    }
 }

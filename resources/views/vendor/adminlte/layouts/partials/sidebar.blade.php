@@ -35,10 +35,23 @@
             <!-- Optionally, you can add icons to the links -->
             <li class=""><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa  fa-calendar-plus-o'></i> <span>{{ trans('message.attendance') }}</span></a>
+                <a href="#">
+                    <i class='fa  fa-calendar-plus-o'></i>
+                    <span>{{ trans('message.attendance') }}</span>
+                </a>
                 <ul class="treeview-menu">
-                <li class=""><a href="{{ url('attendance') }}"><i class='fa fa-list'></i>
-                    <span>Lista de Atendimentos</span></a></li>
+                    <li class="">
+                        <a href="{{ url('attendance') }}">
+                            <i class='fa fa-list'></i>
+                            <span>Lista de Atendimentos</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{ url('attendance/report') }}">
+                            <i class='fa fa-list'></i>
+                            <span>Relatório</span>
+                        </a>
+                    </li>
                     <!-- <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li> -->
                 </ul>
             </li>

@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
      Route::get('/home',                               	  'Family_compositionController@atendimentosDiario');
 
      // rotas responsáveis pelos atendimentos 
+     Route::get('/attendance/report',                      'atendimentoController@report');
      Route::get('/attendance/{id}',                        'atendimentoController@create');
      Route::post('/attendance/{id}',                       'atendimentoController@store');
      Route::get('/attendance',                             'atendimentoController@index');
