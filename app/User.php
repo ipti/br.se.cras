@@ -34,16 +34,16 @@ class User extends Authenticatable
     public function getTipoUsuarioAttribute()
     {
         switch ($this->user_type) {
-            case 'T':
-                return 'Técnico';
-            case 'C':
+            case '1':
+                return 'Administrador';
+            case '2':
+                return 'Auxiliar administrativo';
+            case '3':
+                return 'Técnico de nível superior';
+            case '4':
                 return 'Coordenador(a)';
-            case 'A':
-                return 'Assistente Social';
-            case 'P':
-                return 'Psicólogo(a)';
-            case 'S':
-                return 'Secretário(a)';
+            case '5':
+                return 'Operador Cadastro Único';
             default:
                 return '';
         }

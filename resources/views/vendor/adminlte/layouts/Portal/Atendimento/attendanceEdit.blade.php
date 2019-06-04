@@ -58,11 +58,24 @@
                   <option value="">Selecione</option>
                   <option value="Inclusão Cadastro Único" {{ $id->encaminhamento === 'Inclusão Cadastro Único' }}>Inclusão Cadastro Único</option>
                   <option value="Atualização Cadastral" {{ $id->encaminhamento === 'Atualização Cadastral' }}>Atualização Cadastral</option>
-                  <option value="Consulta" {{ $id->encaminhamento === 'Consulta' }}>Consulta</option>
-                  <option value="BPC" {{ $id->encaminhamento === 'BPC' }}>BPC</option>
-                  <option value="Bolsa Família" {{ $id->encaminhamento === 'Bolsa Família' }}>Bolsa Família</option>
-                  <option value="Tarifa Social" {{ $id->encaminhamento === 'Tarifa Social' }}>Tarifa Social</option>
-                  <option value="Acolhimento" {{ $id->encaminhamento === 'Acolhimento' }}>Acolhimento</option>
+                  <option value="Regularização do benefício" {{ $id->encaminhamento === 'Regularização do benefício' }}>Regularização do benefício</option>
+                  <option value="Verificação do benefício" {{ $id->encaminhamento === 'Verificação do benefício' }}>Verificação do benefício</option>
+                  <option value="Descrumprimento de condicionalidades" {{ $id->encaminhamento === 'Descrumprimento de condicionalidades' }}>Descrumprimento de condicionalidades</option>
+                  <option value="Folha resumo" {{ $id->encaminhamento === 'Folha resumo' }}>Folha resumo</option>
+                  <option value="Tarifa social" {{ $id->encaminhamento === 'Tarifa social' }}>Tarifa social</option>
+                  <option value="Inclusão PAIF" {{ $id->encaminhamento === 'Inclusão PAIF' }}>Inclusão PAIF</option>
+                  <option value="Benefício de prestação continuada - BPC" {{ $id->encaminhamento === 'Benefício de prestação continuada - BPC' }}>Benefício de prestação continuada - BPC</option>
+                  <option value="Regularização de documentação civil" {{ $id->encaminhamento === 'Regularização de documentação civil' }}>Regularização de documentação civil</option>
+                  <option value="Benefício eventual para gestante" {{ $id->encaminhamento === 'Benefício eventual para gestante' }}>Benefício eventual para gestante</option>
+                  <option value="Benefício eventual para funeral" {{ $id->encaminhamento === 'Benefício eventual para funeral' }}>Benefício eventual para funeral</option>
+                  <option value="Outros benefícios eventuais" {{ $id->encaminhamento === 'Outros benefícios eventuais' }}>Outros benefícios eventuais</option>
+                  <option value="Carteira do idoso interestadual" {{ $id->encaminhamento === 'Carteira do idoso interestadual' }}>Carteira do idoso interestadual</option>
+                  <option value="Acesso a programa de habilitação" {{ $id->encaminhamento === 'Acesso a programa de habilitação' }}>Acesso a programa de habilitação</option>
+                  <option value="Acesso a cursos de capacitação" {{ $id->encaminhamento === 'Acesso a cursos de capacitação' }}>Acesso a cursos de capacitação</option>
+                  <option value="Carterira intermunicipal Idoso/Deficiente" {{ $id->encaminhamento === 'Carterira intermunicipal Idoso/Deficiente' }}>Carterira intermunicipal Idoso/Deficiente</option>
+                  <option value="Serviço de convivência e fortalecimento de vínculos" {{ $id->encaminhamento === 'Serviço de convivência e fortalecimento de vínculos' }}>Serviço de convivência e fortalecimento de vínculos</option>
+                  <option value="Encaminhamentos para outras unicidade" {{ $id->encaminhamento === 'Encaminhamentos para outras unicidade' }}>Encaminhamentos para outras unicidade</option>
+                  <option value="Outros" {{ $id->encaminhamento === 'Outros' }}>Outros</option>
               </select>
             </div>
           </div>
