@@ -59,11 +59,11 @@
                             </label>
                             <select class="form-control" name="user_type" id="user-type" required>
                                 <option value="">Selecione</option>
-                                <option value="T" {{ (old('user_type') ?? $user->user_type) === 'T' ? 'selected' : '' }}>Técnico</option>
-                                <option value="C" {{ (old('user_type') ?? $user->user_type) === 'C' ? 'selected' : '' }}>Coordenador(a)</option>
-                                <option value="A" {{ (old('user_type') ?? $user->user_type) === 'A' ? 'selected' : '' }}>Assistente Social</option>
-                                <option value="P" {{ (old('user_type') ?? $user->user_type) === 'P' ? 'selected' : '' }}>Psicólogo(a)</option>
-                                <option value="S" {{ (old('user_type') ?? $user->user_type) === 'S' ? 'selected' : '' }}>Secretário(a)</option>
+                                <option value="1" {{ (old('user_type') === '1' ?? $user->user_type === '1') ? 'selected' : '' }}>Administrador</option>
+                                <option value="2" {{ (old('user_type') === '2' ?? $user->user_type === '2') ? 'selected' : '' }}>Auxiliar administrativo</option>
+                                <option value="3" {{ (old('user_type') === '3' ?? $user->user_type === '3') ? 'selected' : '' }}>Técnico de nível superior</option>
+                                <option value="4" {{ (old('user_type') === '4' ?? $user->user_type === '4') ? 'selected' : '' }}>Coordenador(a)</option>
+                                <option value="5" {{ (old('user_type') === '5' ?? $user->user_type === '5') ? 'selected' : '' }}>Operador Cadastro Único</option>
                             </select>
                             @if ($errors->has('user_type'))
                                 <span class="text-danger">{{ $errors->first('user_type') }}</span>

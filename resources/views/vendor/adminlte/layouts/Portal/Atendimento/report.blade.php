@@ -64,14 +64,14 @@
                             <table class="table table-stripped">
                                 <thead>
                                     <tr>
-                                        <th>Encaminhamento</th>
+                                        <th>Serviço</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($atendimentos as $atendimento)
                                         <tr>
-                                            <td>{{ $atendimento->encaminhamento }}</td>
+                                            <td>{{ $atendimento->servico }}</td>
                                             <td>{{ $atendimento->total }}</td>
                                         </tr>
                                     @endforeach

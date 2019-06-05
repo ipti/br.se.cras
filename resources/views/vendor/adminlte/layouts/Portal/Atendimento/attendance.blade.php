@@ -26,14 +26,27 @@
         <div class="row form-group">
             <div class="col-md-4">
                 <select class="form-control filtro-encaminhamento">
-                    <option value="">Encaminhamento</option>
+                    <option value="">Serviço</option>
                     <option value="Inclusão Cadastro Único">Inclusão Cadastro Único</option>
                     <option value="Atualização Cadastral">Atualização Cadastral</option>
-                    <option value="Consulta">Consulta</option>
-                    <option value="BPC">BPC</option>
-                    <option value="Bolsa Família">Bolsa Família</option>
-                    <option value="Tarifa Social">Tarifa Social</option>
-                    <option value="Acolhimento">Acolhimento</option>
+                    <option value="Regularização do benefício">Regularização do benefício</option>
+                    <option value="Verificação do benefício">Verificação do benefício</option>
+                    <option value="Descrumprimento de condicionalidades">Descrumprimento de condicionalidades</option>
+                    <option value="Folha resumo">Folha resumo</option>
+                    <option value="Tarifa social">Tarifa social</option>
+                    <option value="Inclusão PAIF">Inclusão PAIF</option>
+                    <option value="Benefício de prestação continuada - BPC">Benefício de prestação continuada - BPC</option>
+                    <option value="Regularização de documentação civil">Regularização de documentação civil</option>
+                    <option value="Benefício eventual para gestante">Benefício eventual para gestante</option>
+                    <option value="Benefício eventual para funeral">Benefício eventual para funeral</option>
+                    <option value="Outros benefícios eventuais">Outros benefícios eventuais</option>
+                    <option value="Carteira do idoso interestadual">Carteira do idoso interestadual</option>
+                    <option value="Acesso a programa de habilitação">Acesso a programa de habilitação</option>
+                    <option value="Acesso a cursos de capacitação">Acesso a cursos de capacitação</option>
+                    <option value="Carterira intermunicipal Idoso/Deficiente">Carterira intermunicipal Idoso/Deficiente</option>
+                    <option value="Serviço de convivência e fortalecimento de vínculos">Serviço de convivência e fortalecimento de vínculos</option>
+                    <option value="Encaminhamentos para outras unicidade">Encaminhamentos para outras unicidade</option>
+                    <option value="Outros">Outros</option>
                 </select>
             </div>
         </div>
@@ -45,7 +58,7 @@
                 <th style="text-align: center;">Data de Atendimento</th>
                 <th style="text-align: center;">RG/NIS</th>
                 <th style="text-align: center;">Técnico</th>
-                <th style="text-align: center;">Solicitação</th>
+                <th style="text-align: center;">Serviço</th>
                 <th style="text-align: center;">Encaminhamento</th>
                 <th style="text-align: center;">Resultado </th>
                 <th style="text-align: center;">Editar </th>
@@ -59,7 +72,7 @@
                 <th style="text-align: center;">{{$id->data}}</th>
                 <th style="text-align: center;">{{$id->numero_rg}}-{{$id->emissao_rg}}-{{$id->uf_rg}} | {{$id->NIS}}</th>
                 <th style="text-align: center;">{{$id->nome_tecnico}} </th>
-                <th style="text-align: center;">{{$id->solicitacao}}</th>
+                <th style="text-align: center;">{{$id->servico}}</th>
                 <th style="text-align: center;">{{$id->encaminhamento}}</th>
                 <th style="text-align: center;">{{$id->resultado}}</th>     
                 <th style="text-align: center;">

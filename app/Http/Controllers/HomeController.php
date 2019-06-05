@@ -55,9 +55,9 @@ class HomeController extends Controller
 
         $totalFamilias = DB::table('identificacao_usuario')->select('totalFamilias')->count();
 
-        $totalFamiliasInclusaoCadastroUnico = DB::table('atendimentos')->where('encaminhamento', 'Inclusão Cadastro Único')->count();
-        $totalFamiliasAtualizacaoCadastral = DB::table('atendimentos')->where('encaminhamento', 'Atualização Cadastral')->count();
-        $totalFamiliasAcessoBpc = DB::table('atendimentos')->where('encaminhamento', 'Benefício de prestação continuada - BPC')->count();
+        $totalFamiliasInclusaoCadastroUnico = DB::table('atendimentos')->where('servico', 'Inclusão Cadastro Único')->count();
+        $totalFamiliasAtualizacaoCadastral = DB::table('atendimentos')->where('servico', 'Atualização Cadastral')->count();
+        $totalFamiliasAcessoBpc = DB::table('atendimentos')->where('servico', 'Benefício de prestação continuada - BPC')->count();
             
         return view('adminlte::home', compact(
             'identificacao',

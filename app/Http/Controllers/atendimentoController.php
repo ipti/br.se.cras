@@ -298,10 +298,10 @@ class atendimentoController extends Controller
         $atendimentos = [];
         if ($request->has('data_inicial') && $request->has('data_final')) {
             $atendimentos = DB::table('atendimentos')
-                ->select(DB::raw('COUNT(encaminhamento) AS total, encaminhamento'))
+                ->select(DB::raw('COUNT(servico) AS total, servico'))
                 ->where('data', '>=', "$anoDtIn-$mesDtIn-$diaDtIn")
                 ->where('data', '<=', "$anoDtFn-$mesDtFn-$diaDtFn")
-                ->groupBy('encaminhamento')
+                ->groupBy('servico')
                 ->get();
         }
 

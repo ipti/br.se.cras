@@ -45,7 +45,7 @@
     });
 
     $('.filtro-encaminhamento').change(function () {
-        tableAtendimentos.columns(6).search(this.value).draw();
+        tableAtendimentos.columns(5).search(this.value).draw();
     });
   });
 </script>
