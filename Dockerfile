@@ -7,10 +7,10 @@ RUN apk add --no-cache \
         gcc \
         g++ \
         openssl-dev \
-        libtool \
+        libtool &&\
 #pecl install mongodb \
 #&& docker-php-ext-enable mongodb \
-#&& apk del build-deps
+apk del build-deps
 #RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/pecl-mongodb.ini
 COPY . /app
 RUN chown -R www-data:www-data /usr/local/bin/composer
