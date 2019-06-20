@@ -13,7 +13,7 @@ RUN apk add --no-cache \
 apk del build-deps
 #RUN echo "extension=mongodb.so" > /usr/local/etc/php/conf.d/pecl-mongodb.ini
 COPY . /app
-RUN   sed -i "s|/app/web|/app/public|g" /etc/nginx/conf.d/default.conf
+RUN sed -i "s|/app/web|/app/public|g" /etc/nginx/conf.d/default.conf
 RUN chown -R www-data:www-data /usr/local/bin/composer
 RUN chmod 777 /usr/local/bin/composer
 RUN chmod 777 /usr/local/bin/docker-run.sh
