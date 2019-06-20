@@ -7,7 +7,7 @@ RUN apk add --no-cache \
         gcc \
         g++ \
         openssl-dev \
-        libtool && \
+        libtool \
 #pecl install mongodb \
 #&& docker-php-ext-enable mongodb \
 #&& apk del build-deps
