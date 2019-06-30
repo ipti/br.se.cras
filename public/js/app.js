@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
+﻿/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -25000,7 +25000,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     submit: function submit() {
       var _this = this;
 
-      this.form.post('/login').then(function (response) {
+      this.form.post('/cras/login').then(function (response) {
         var component = _this;
         setTimeout(function () {
           component.redirect(response);
